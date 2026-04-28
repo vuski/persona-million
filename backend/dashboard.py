@@ -13,6 +13,7 @@ from streamlit_autorefresh import st_autorefresh
 
 BASE = Path(__file__).parent
 RESULTS_PATH = BASE / "vote_results_all.csv"
+VOTER_CONTEXT_PATH = BASE / "context" / "voter_context.md"
 
 # 정당별 색상 — 한국 통상 인식 기준 (대략적)
 PARTY_COLORS = {
@@ -48,11 +49,24 @@ df = load_data(mtime)
 
 # ───────────────────────────── HEADER
 st.title("🗳️ 페르소나 가상 투표 실험")
+st.markdown(
+    "<div style='color:#888;font-size:0.9em;margin-bottom:8px'>"
+    "합성 페르소나(Nemotron-Personas-Korea) 기반 LLM 투표 시뮬레이션 · "
+    "<a href='https://github.com/vuski/persona-million' target='_blank' "
+    "style='color:#888;text-decoration:underline'>github.com/vuski/persona-million</a>"
+    "</div>",
+    unsafe_allow_html=True,
+)
 st.caption(
     f"데이터 출처: `{RESULTS_PATH.name}` · "
     f"마지막 갱신: {datetime.fromtimestamp(mtime).strftime('%H:%M:%S') if mtime else '—'} · "
     f"3초마다 자동 새로고침"
 )
+
+# voter context — LLM 프롬프트에 주입한 정치 상황 컨텍스트
+if VOTER_CONTEXT_PATH.exists():
+    with st.expander("📋 LLM에 주입한 정치 상황 컨텍스트 (voter_context.md)"):
+        st.markdown(VOTER_CONTEXT_PATH.read_text(encoding="utf-8"))
 
 if df.empty:
     st.warning("아직 결과가 없습니다. 노트북에서 셀을 실행해주세요.")

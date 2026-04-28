@@ -41,9 +41,13 @@
   <script type="module">
     import { mount } from "https://cdn.jsdelivr.net/npm/@stlite/browser@0.85.1/build/stlite.js";
 
-    // CSV를 fetch로 불러오기 (같은 origin)
-    const csvResp = await fetch("./backend/vote_results_all.csv");
+    // CSV + voter context 둘 다 fetch
+    const [csvResp, ctxResp] = await Promise.all([
+      fetch("./backend/vote_results_all.csv"),
+      fetch("./backend/context/voter_context.md"),
+    ]);
     const csvText = await csvResp.text();
+    const ctxText = await ctxResp.text();
 
     // dashboard.py 본문 (streamlit-autorefresh 제거 + 정적 페이지용 조정)
     const appPy = `
@@ -76,7 +80,20 @@ def load_data() -> pd.DataFrame:
 df = load_data()
 
 st.title("🗳️ 페르소나 가상 투표 실험")
-st.caption(f"데이터: vote_results_all.csv · {len(df):,}건 · 합성 페르소나(Nemotron-Personas-Korea) 기반 LLM 투표 시뮬레이션")
+st.markdown(
+    "<div style='color:#888;font-size:0.9em;margin-bottom:8px'>"
+    "합성 페르소나(Nemotron-Personas-Korea) 기반 LLM 투표 시뮬레이션 · "
+    "<a href='https://github.com/vuski/persona-million' target='_blank' "
+    "style='color:#888;text-decoration:underline'>github.com/vuski/persona-million</a>"
+    "</div>",
+    unsafe_allow_html=True,
+)
+st.caption(f"데이터: vote_results_all.csv · {len(df):,}건")
+
+# voter context — LLM 프롬프트에 주입한 정치 상황 컨텍스트
+with st.expander("📋 LLM에 주입한 정치 상황 컨텍스트 (voter_context.md)"):
+    with open("voter_context.md", encoding="utf-8") as f:
+        st.markdown(f.read())
 
 if df.empty:
     st.warning("데이터 없음")
@@ -259,6 +276,7 @@ with st.expander("원본 데이터 (전체 행)"):
       files: {
         "app.py": appPy,
         "vote_results_all.csv": csvText,
+        "voter_context.md": ctxText,
       },
     }, document.getElementById("root"));
   </script>
