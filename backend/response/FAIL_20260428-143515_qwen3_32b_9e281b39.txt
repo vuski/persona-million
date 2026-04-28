@@ -1,0 +1,6 @@
+=== ERROR: no JSON object in response: '```json\n{"vote": "국민의힘", "reason": "경기 이천시의 전통적 지역 정서와 보수 성향에 자연스럽게 기대'
+=== MODEL: qwen3:32b
+=== UUID: 9e281b3962484c5b9d5212b164a383ce
+
+```json
+{"vote": "국민의힘", "reason": "경기 이천시의 전통적 지역 정서와 보수 성향에 자연스럽게 기대

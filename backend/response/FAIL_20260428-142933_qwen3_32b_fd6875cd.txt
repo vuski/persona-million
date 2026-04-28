@@ -1,0 +1,6 @@
+=== ERROR: no JSON object in response: '```json\n{"vote": "무당층/기권", "reason": "나는 정치보다는 평온한 삶을 중요하게 생각한다. 젊은 시절 울산의 발전'
+=== MODEL: qwen3:32b
+=== UUID: fd6875cd8aa5491da2bc016606df3300
+
+```json
+{"vote": "무당층/기권", "reason": "나는 정치보다는 평온한 삶을 중요하게 생각한다. 젊은 시절 울산의 발전

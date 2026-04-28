@@ -1,0 +1,8 @@
+=== ERROR: no JSON object in response: '```json\n{\n  "vote": "개혁신당",\n  "reason": "전후 복구 시기의 혼란과 부천의 급격'
+=== MODEL: qwen3:32b
+=== UUID: 76cb124d5e0a4b43bfc36e625f62a6d7
+
+```json
+{
+  "vote": "개혁신당",
+  "reason": "전후 복구 시기의 혼란과 부천의 급격
