@@ -13,7 +13,17 @@ from streamlit_autorefresh import st_autorefresh
 
 BASE = Path(__file__).parent
 RESULTS_PATH = BASE / "vote_results_all.csv"
-VOTER_CONTEXT_PATH = BASE / "context" / "voter_context.md"
+CONTEXT_DIR = BASE / "context"
+
+import re
+def list_versions(prefix: str) -> list[str]:
+    pat = re.compile(rf"^{re.escape(prefix)}_v(\d+)\.md$")
+    out = []
+    for p in CONTEXT_DIR.iterdir():
+        m = pat.match(p.name)
+        if m:
+            out.append(f"v{m.group(1)}")
+    return sorted(out, key=lambda v: int(v[1:]))
 
 # 정당별 색상 — 한국 통상 인식 기준 (대략적)
 PARTY_COLORS = {
@@ -63,10 +73,20 @@ st.caption(
     f"3초마다 자동 새로고침"
 )
 
-# voter context — LLM 프롬프트에 주입한 정치 상황 컨텍스트
-if VOTER_CONTEXT_PATH.exists():
-    with st.expander("📋 LLM에 주입한 정치 상황 컨텍스트 (voter_context.md)"):
-        st.markdown(VOTER_CONTEXT_PATH.read_text(encoding="utf-8"))
+# voter context + system prompt — 버전 선택 후 보기
+voter_versions = list_versions("voter_context")
+system_versions = list_versions("system_prompt")
+if voter_versions or system_versions:
+    with st.expander("📋 LLM에 주입한 컨텍스트·시스템 프롬프트 (버전별)"):
+        tab1, tab2 = st.tabs(["voter_context", "system_prompt"])
+        with tab1:
+            v = st.selectbox("voter_context 버전", voter_versions, key="voter_v_view")
+            if v:
+                st.markdown((CONTEXT_DIR / f"voter_context_{v}.md").read_text(encoding="utf-8"))
+        with tab2:
+            s = st.selectbox("system_prompt 버전", system_versions, key="system_v_view")
+            if s:
+                st.markdown((CONTEXT_DIR / f"system_prompt_{s}.md").read_text(encoding="utf-8"))
 
 if df.empty:
     st.warning("아직 결과가 없습니다. 노트북에서 셀을 실행해주세요.")
@@ -84,39 +104,76 @@ st.divider()
 # ───────────────────────────── 섹션 1: 모델별 비교
 st.subheader("모델별 비교")
 
+# 비교 단위: 모델 단독 vs 모델 × 컨텍스트 버전
+compare_mode = st.radio(
+    "비교 단위",
+    options=["모델만", "모델 × 버전"],
+    horizontal=True,
+    key="compare_mode",
+)
+# 단일 버전 컬럼 (voter == system 강제. mismatch면 voter 사용)
+df["version"] = df["voter_context_version"].fillna("?")
+
 col_a, col_b = st.columns([2, 1])
 
 with col_a:
-    # 모델 × 정당 그룹 막대그래프 (비율)
-    pivot = (
-        df.groupby(["model", "vote"]).size()
-        .reset_index(name="count")
-    )
-    pivot["pct"] = pivot.groupby("model")["count"].transform(lambda x: x / x.sum() * 100)
-    fig = px.bar(
-        pivot, x="model", y="pct", color="vote",
-        color_discrete_map=PARTY_COLORS,
-        labels={"pct": "득표율 (%)", "model": "모델", "vote": "정당"},
-        title="모델별 정당 득표율",
-        barmode="stack",
-        text=pivot["pct"].round(1).astype(str) + "%",
-    )
-    fig.update_traces(textposition="inside")
-    fig.update_layout(height=400, legend_title="")
+    if compare_mode == "모델 × 버전":
+        # 모델별 facet — 각 모델 동일 폭, 안에서 버전별 스택 막대 나열
+        pivot = (
+            df.groupby(["model", "version", "vote"]).size()
+            .reset_index(name="count")
+        )
+        pivot["pct"] = pivot.groupby(["model", "version"])["count"].transform(
+            lambda x: x / x.sum() * 100
+        )
+        fig = px.bar(
+            pivot, x="version", y="pct", color="vote",
+            facet_col="model",
+            color_discrete_map=PARTY_COLORS,
+            labels={"pct": "득표율 (%)", "version": "", "vote": "정당"},
+            title="모델 × 버전별 정당 득표율",
+            barmode="stack",
+        )
+        fig.update_layout(height=420, legend_title="")
+        fig.for_each_annotation(lambda a: a.update(text=a.text.split("=")[-1]))
+    else:
+        pivot = df.groupby(["model", "vote"]).size().reset_index(name="count")
+        pivot["pct"] = pivot.groupby("model")["count"].transform(lambda x: x / x.sum() * 100)
+        fig = px.bar(
+            pivot, x="model", y="pct", color="vote",
+            color_discrete_map=PARTY_COLORS,
+            labels={"pct": "득표율 (%)", "model": "모델", "vote": "정당"},
+            title="모델별 정당 득표율", barmode="stack",
+            text=pivot["pct"].round(1).astype(str) + "%",
+        )
+        fig.update_traces(textposition="inside")
+        fig.update_layout(height=400, legend_title="")
     st.plotly_chart(fig, use_container_width=True)
 
 with col_b:
-    # 모델별 평균 응답시간
-    timing = df.groupby("model")["elapsed_sec"].agg(["mean", "count"]).reset_index()
-    timing.columns = ["model", "평균시간(s)", "응답수"]
-    fig2 = px.bar(
-        timing, x="model", y="평균시간(s)",
-        labels={"model": "모델"},
-        title="모델별 평균 응답시간",
-        text=timing["평균시간(s)"].round(1),
-    )
+    if compare_mode == "모델 × 버전":
+        timing = (
+            df.groupby(["model", "version"])["elapsed_sec"]
+            .agg(["mean", "count"]).reset_index()
+        )
+        timing.columns = ["model", "버전", "평균시간(s)", "응답수"]
+        fig2 = px.bar(
+            timing, x="model", y="평균시간(s)", color="버전",
+            barmode="group",
+            title="평균 응답시간 (모델 × 버전)",
+            text=timing["평균시간(s)"].round(1),
+        )
+    else:
+        timing = df.groupby("model")["elapsed_sec"].agg(["mean", "count"]).reset_index()
+        timing.columns = ["model", "평균시간(s)", "응답수"]
+        fig2 = px.bar(
+            timing, x="model", y="평균시간(s)",
+            title="모델별 평균 응답시간",
+            text=timing["평균시간(s)"].round(1),
+        )
     fig2.update_traces(textposition="outside")
-    fig2.update_layout(height=400, showlegend=False)
+    # 모델만 모드에선 색구분 없으니 legend 숨김, 모델 × 버전 모드에선 버전 범례 보여줘야 함
+    fig2.update_layout(height=400, showlegend=(compare_mode == "모델 × 버전"))
     st.plotly_chart(fig2, use_container_width=True)
     st.dataframe(timing, hide_index=True, use_container_width=True)
 
@@ -125,12 +182,24 @@ st.divider()
 # ───────────────────────────── 섹션 2: 인구통계 교차분석
 st.subheader("인구통계 교차분석")
 
-model_filter = st.multiselect(
-    "모델 필터 (다중 선택)",
-    options=sorted(df["model"].unique()),
-    default=sorted(df["model"].unique()),
-)
+fcols_v = st.columns(3)
+with fcols_v[0]:
+    model_filter = st.multiselect(
+        "모델", options=sorted(df["model"].unique()),
+        default=sorted(df["model"].unique()),
+    )
+with fcols_v[1]:
+    voter_opts = sorted(df["voter_context_version"].dropna().unique()) if "voter_context_version" in df.columns else []
+    voter_filter = st.multiselect("voter_context 버전", options=voter_opts, default=voter_opts)
+with fcols_v[2]:
+    sys_opts = sorted(df["system_prompt_version"].dropna().unique()) if "system_prompt_version" in df.columns else []
+    sys_filter = st.multiselect("system_prompt 버전", options=sys_opts, default=sys_opts)
+
 df_filt = df[df["model"].isin(model_filter)]
+if voter_opts:
+    df_filt = df_filt[df_filt["voter_context_version"].isin(voter_filter)]
+if sys_opts:
+    df_filt = df_filt[df_filt["system_prompt_version"].isin(sys_filter)]
 
 if not df_filt.empty:
     col1, col2, col3 = st.columns(3)
@@ -196,8 +265,16 @@ for _, r in recent.iterrows():
     with st.container(border=True):
         cols = st.columns([3, 1])
         with cols[0]:
+            voter_v = r.get("voter_context_version", "")
+            sys_v = r.get("system_prompt_version", "")
+            ver_badge = ""
+            if voter_v or sys_v:
+                ver_badge = (
+                    f" <span style='color:#999;font-weight:300;font-size:0.8em'>"
+                    f"voter:{voter_v} · system:{sys_v}</span>"
+                )
             st.markdown(
-                f"**`{r['model']}`** "
+                f"**`{r['model']}`**{ver_badge} "
                 f"<span style='color:#999;font-weight:300;font-size:0.85em'>persona_uuid</span> "
                 f"<code style='color:#999;font-size:0.85em;background:transparent;padding:0'>"
                 f"{r['persona_uuid']}</code>",

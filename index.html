@@ -41,13 +41,22 @@
   <script type="module">
     import { mount } from "https://cdn.jsdelivr.net/npm/@stlite/browser@0.85.1/build/stlite.js";
 
-    // CSV + voter context 둘 다 fetch
-    const [csvResp, ctxResp] = await Promise.all([
-      fetch("./backend/vote_results_all.csv"),
-      fetch("./backend/context/voter_context.md"),
-    ]);
+    // CSV + 모든 voter_context_v*.md / system_prompt_v*.md 자동 수집
+    const csvResp = await fetch("./backend/vote_results_all.csv");
     const csvText = await csvResp.text();
-    const ctxText = await ctxResp.text();
+
+    // GitHub API로 context 폴더 파일 목록 조회 (정적 호스팅이라 디렉토리 listing 못 함)
+    // 간단히 v1, v2, ..., v9까지 시도해서 200 오는 것만 수집
+    async function collectVersions(prefix) {
+      const found = {};
+      for (let i = 1; i <= 9; i++) {
+        const r = await fetch(`./backend/context/${prefix}_v${i}.md`);
+        if (r.ok) found[`v${i}`] = await r.text();
+      }
+      return found;
+    }
+    const voterCtxFiles = await collectVersions("voter_context");
+    const systemPromptFiles = await collectVersions("system_prompt");
 
     // dashboard.py 본문 (streamlit-autorefresh 제거 + 정적 페이지용 조정)
     const appPy = `
@@ -90,10 +99,36 @@ st.markdown(
 )
 st.caption(f"데이터: vote_results_all.csv · {len(df):,}건")
 
-# voter context — LLM 프롬프트에 주입한 정치 상황 컨텍스트
-with st.expander("📋 LLM에 주입한 정치 상황 컨텍스트 (voter_context.md)"):
-    with open("voter_context.md", encoding="utf-8") as f:
-        st.markdown(f.read())
+import os, re
+def _list_versions(prefix):
+    pat = re.compile(rf"^{re.escape(prefix)}_v(\\\\d+)\\\\.md$")
+    out = []
+    for fn in os.listdir("."):
+        m = pat.match(fn)
+        if m: out.append(f"v{m.group(1)}")
+    return sorted(out, key=lambda v: int(v[1:]))
+
+voter_versions = _list_versions("voter_context")
+system_versions = _list_versions("system_prompt")
+
+with st.expander("📋 LLM에 주입한 컨텍스트·시스템 프롬프트 (버전별)"):
+    tab1, tab2 = st.tabs(["voter_context", "system_prompt"])
+    with tab1:
+        if voter_versions:
+            v = st.selectbox("voter_context 버전", voter_versions, key="voter_v_view")
+            if v:
+                with open(f"voter_context_{v}.md", encoding="utf-8") as f:
+                    st.markdown(f.read())
+        else:
+            st.info("voter_context_v*.md 파일 없음")
+    with tab2:
+        if system_versions:
+            s = st.selectbox("system_prompt 버전", system_versions, key="system_v_view")
+            if s:
+                with open(f"system_prompt_{s}.md", encoding="utf-8") as f:
+                    st.markdown(f.read())
+        else:
+            st.info("system_prompt_v*.md 파일 없음")
 
 if df.empty:
     st.warning("데이터 없음")
@@ -107,43 +142,93 @@ c4.metric("고유 페르소나", df["persona_uuid"].nunique())
 
 st.divider()
 st.subheader("모델별 비교")
+
+compare_mode = st.radio(
+    "비교 단위",
+    options=["모델만", "모델 × 버전"],
+    horizontal=True,
+    key="compare_mode",
+)
+df["version"] = df["voter_context_version"].fillna("?")
+
 col_a, col_b = st.columns([2, 1])
 
 with col_a:
-    pivot = df.groupby(["model", "vote"]).size().reset_index(name="count")
-    pivot["pct"] = pivot.groupby("model")["count"].transform(lambda x: x / x.sum() * 100)
-    fig = px.bar(
-        pivot, x="model", y="pct", color="vote",
-        color_discrete_map=PARTY_COLORS,
-        labels={"pct": "득표율 (%)", "model": "모델", "vote": "정당"},
-        title="모델별 정당 득표율", barmode="stack",
-        text=pivot["pct"].round(1).astype(str) + "%",
-    )
-    fig.update_traces(textposition="inside")
-    fig.update_layout(height=400, legend_title="")
+    if compare_mode == "모델 × 버전":
+        pivot = df.groupby(["model", "version", "vote"]).size().reset_index(name="count")
+        pivot["pct"] = pivot.groupby(["model", "version"])["count"].transform(
+            lambda x: x / x.sum() * 100
+        )
+        fig = px.bar(
+            pivot, x="version", y="pct", color="vote",
+            facet_col="model",
+            color_discrete_map=PARTY_COLORS,
+            labels={"pct": "득표율 (%)", "version": "", "vote": "정당"},
+            title="모델 × 버전별 정당 득표율", barmode="stack",
+        )
+        fig.update_layout(height=420, legend_title="")
+        fig.for_each_annotation(lambda a: a.update(text=a.text.split("=")[-1]))
+    else:
+        pivot = df.groupby(["model", "vote"]).size().reset_index(name="count")
+        pivot["pct"] = pivot.groupby("model")["count"].transform(lambda x: x / x.sum() * 100)
+        fig = px.bar(
+            pivot, x="model", y="pct", color="vote",
+            color_discrete_map=PARTY_COLORS,
+            labels={"pct": "득표율 (%)", "model": "모델", "vote": "정당"},
+            title="모델별 정당 득표율", barmode="stack",
+            text=pivot["pct"].round(1).astype(str) + "%",
+        )
+        fig.update_traces(textposition="inside")
+        fig.update_layout(height=400, legend_title="")
     st.plotly_chart(fig, use_container_width=True)
 
 with col_b:
-    timing = df.groupby("model")["elapsed_sec"].agg(["mean", "count"]).reset_index()
-    timing.columns = ["model", "평균시간(s)", "응답수"]
-    fig2 = px.bar(
-        timing, x="model", y="평균시간(s)",
-        title="모델별 평균 응답시간",
-        text=timing["평균시간(s)"].round(1),
-    )
+    if compare_mode == "모델 × 버전":
+        timing = (
+            df.groupby(["model", "version"])["elapsed_sec"]
+            .agg(["mean", "count"]).reset_index()
+        )
+        timing.columns = ["model", "버전", "평균시간(s)", "응답수"]
+        fig2 = px.bar(
+            timing, x="model", y="평균시간(s)", color="버전",
+            barmode="group",
+            title="평균 응답시간 (모델 × 버전)",
+            text=timing["평균시간(s)"].round(1),
+        )
+    else:
+        timing = df.groupby("model")["elapsed_sec"].agg(["mean", "count"]).reset_index()
+        timing.columns = ["model", "평균시간(s)", "응답수"]
+        fig2 = px.bar(
+            timing, x="model", y="평균시간(s)",
+            title="모델별 평균 응답시간",
+            text=timing["평균시간(s)"].round(1),
+        )
     fig2.update_traces(textposition="outside")
-    fig2.update_layout(height=400, showlegend=False)
+    fig2.update_layout(height=400, showlegend=(compare_mode == "모델 × 버전"))
     st.plotly_chart(fig2, use_container_width=True)
     st.dataframe(timing, hide_index=True, use_container_width=True)
 
 st.divider()
 st.subheader("인구통계 교차분석")
 
-model_filter = st.multiselect(
-    "모델 필터", options=sorted(df["model"].unique()),
-    default=sorted(df["model"].unique()),
-)
+fcols_v = st.columns(3)
+with fcols_v[0]:
+    model_filter = st.multiselect(
+        "모델", options=sorted(df["model"].unique()),
+        default=sorted(df["model"].unique()),
+    )
+with fcols_v[1]:
+    voter_opts = sorted(df["voter_context_version"].dropna().unique()) if "voter_context_version" in df.columns else []
+    voter_filter = st.multiselect("voter_context 버전", options=voter_opts, default=voter_opts)
+with fcols_v[2]:
+    sys_opts = sorted(df["system_prompt_version"].dropna().unique()) if "system_prompt_version" in df.columns else []
+    sys_filter = st.multiselect("system_prompt 버전", options=sys_opts, default=sys_opts)
+
 df_filt = df[df["model"].isin(model_filter)]
+if voter_opts:
+    df_filt = df_filt[df_filt["voter_context_version"].isin(voter_filter)]
+if sys_opts:
+    df_filt = df_filt[df_filt["system_prompt_version"].isin(sys_filter)]
 
 if not df_filt.empty:
     col1, col2, col3 = st.columns(3)
@@ -199,8 +284,16 @@ for _, r in recent.iterrows():
     with st.container(border=True):
         cols = st.columns([3, 1])
         with cols[0]:
+            voter_v = r.get("voter_context_version", "")
+            sys_v = r.get("system_prompt_version", "")
+            ver_badge = ""
+            if voter_v or sys_v:
+                ver_badge = (
+                    f" <span style='color:#999;font-weight:300;font-size:0.8em'>"
+                    f"voter:{voter_v} · system:{sys_v}</span>"
+                )
             st.markdown(
-                f"**\`{r['model']}\`** "
+                f"**\`{r['model']}\`**{ver_badge} "
                 f"<span style='color:#999;font-weight:300;font-size:0.85em'>persona_uuid</span> "
                 f"<code style='color:#999;font-size:0.85em;background:transparent;padding:0'>"
                 f"{r['persona_uuid']}</code>",
@@ -276,7 +369,12 @@ with st.expander("원본 데이터 (전체 행)"):
       files: {
         "app.py": appPy,
         "vote_results_all.csv": csvText,
-        "voter_context.md": ctxText,
+        ...Object.fromEntries(Object.entries(voterCtxFiles).map(
+          ([v, txt]) => [`voter_context_${v}.md`, txt]
+        )),
+        ...Object.fromEntries(Object.entries(systemPromptFiles).map(
+          ([v, txt]) => [`system_prompt_${v}.md`, txt]
+        )),
       },
     }, document.getElementById("root"));
   </script>

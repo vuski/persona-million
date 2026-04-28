@@ -9,7 +9,7 @@ from langchain_openai import ChatOpenAI
 
 BASE = Path(__file__).resolve().parent
 DATA_DIR = BASE / "nvidia-personas" / "data"
-CONTEXT_PATH = BASE / "context" / "voter_context.md"
+CONTEXT_DIR = BASE / "context"
 RESULTS_PATH = BASE / "vote_results_all.csv"
 RESPONSE_DIR = BASE / "response"
 RESPONSE_DIR.mkdir(exist_ok=True)
@@ -22,21 +22,23 @@ for env_path in [BASE / ".env.local", BASE.parent / ".env.local"]:
         break
 assert os.environ.get("OPENAI_API_KEY"), "OPENAI_API_KEY 필요"
 
-POLITICAL_CONTEXT = CONTEXT_PATH.read_text(encoding="utf-8")
 shards = sorted(glob.glob(str(DATA_DIR / "train-*.parquet")))
 
-SYSTEM_TEMPLATE = """당신은 사회조사 시뮬레이션을 위한 가상 응답자다. 주어진 페르소나의 인물 서사·인구통계·가치관·관심사를 바탕으로, 그 인물이 실제로 할 법한 정치 선택을 1인칭 시점에서 추론한다.
+# ── 컨텍스트·시스템 프롬프트 버전 자동 감지 ──
+def list_versions(prefix: str) -> list[str]:
+    pat = re.compile(rf"^{re.escape(prefix)}_v(\d+)\.md$")
+    versions = []
+    for p in CONTEXT_DIR.iterdir():
+        m = pat.match(p.name)
+        if m:
+            versions.append(f"v{m.group(1)}")
+    return sorted(versions, key=lambda v: int(v[1:]))
 
-다음 규칙을 따른다:
-1. 아래 [정치상황 컨텍스트]에 명시된 정당과 쟁점만 사용한다. 외부 정보·최신 추정 금지.
-2. 페르소나의 연령·지역·직업·생애 맥락·가치관과 정합적인 선택을 한다. 단순히 인구통계 평균에 의존하지 말고 인물 서사를 우선한다.
-3. 무당층·기권도 정당한 선택지다. 페르소나가 정치에 무관심하거나 기존 정당 모두에 거리감이 있으면 그렇게 답한다.
-4. 출력은 반드시 다음 JSON 형식만 (코드블록·설명·머리말 일절 금지):
-{{"vote": "<정당명 또는 '무당층/기권'>", "reason": "<해당 인물의 1인칭 시점으로 200~400자 이내 한국어 설명>"}}
+def load_context(version: str) -> str:
+    return (CONTEXT_DIR / f"voter_context_{version}.md").read_text(encoding="utf-8")
 
-## [정치상황 컨텍스트]
-{political_context}
-"""
+def load_system_prompt(version: str) -> str:
+    return (CONTEXT_DIR / f"system_prompt_{version}.md").read_text(encoding="utf-8")
 
 USER_TEMPLATE = """다음 페르소나가 2026년 6월 3일 지방선거(또는 가까운 미래의 총선·대선)에서 어느 정당을 지지·투표할지 추론하시오.
 
@@ -44,9 +46,11 @@ USER_TEMPLATE = """다음 페르소나가 2026년 6월 3일 지방선거(또는 
 
 JSON만 출력."""
 
-prompt = ChatPromptTemplate.from_messages([
-    ("system", SYSTEM_TEMPLATE), ("user", USER_TEMPLATE),
-])
+def build_prompt(system_template: str) -> ChatPromptTemplate:
+    return ChatPromptTemplate.from_messages([
+        ("system", system_template),
+        ("user", USER_TEMPLATE),
+    ])
 
 def persona_card(r) -> str:
     fields = [
@@ -68,33 +72,71 @@ def persona_card(r) -> str:
     )
     return f"## 인구통계\n{demo}\n\n## 인물 서사\n{narr}"
 
+VOTE_KEYS = ("vote", "party", "정당", "지지정당", "투표", "선택", "지지")
+REASON_KEYS = ("reason", "이유", "rationale", "사유", "근거", "설명")
+
+def _try_complete_json(s: str) -> str:
+    last_close = s.rfind("}")
+    last_open = s.rfind("{")
+    if last_open == -1:
+        return s
+    if last_close > last_open:
+        return s[last_open:last_close + 1]
+    candidate = s[last_open:].rstrip().rstrip(",")
+    if candidate.count('"') % 2 == 1:
+        candidate += '"'
+    candidate += "}"
+    return candidate
+
 def parse_response(raw: str) -> dict:
     s = raw
     s = re.sub(r"<think>.*?</think>", "", s, flags=re.DOTALL)
     s = re.sub(r"```(?:json)?\s*", "", s)
     s = s.replace("```", "")
     m = re.search(r"\{.*\}", s, flags=re.DOTALL)
-    if not m:
-        raise ValueError(f"no JSON in: {raw[:200]!r}")
-    return json.loads(m.group(0))
+    if m:
+        try:
+            return json.loads(m.group(0))
+        except json.JSONDecodeError:
+            pass
+    repaired = _try_complete_json(s)
+    try:
+        return json.loads(repaired)
+    except json.JSONDecodeError:
+        raise ValueError(f"no parseable JSON in: {raw[:200]!r}")
+
+def pick(d: dict, keys: tuple):
+    for k in keys:
+        v = d.get(k)
+        if v:
+            return v
+    return None
 
 def safe_filename(s: str) -> str:
     return re.sub(r"[^\w\-.]", "_", s)
 
-def run_loop(model_name: str, n: int):
+def run_loop(model_name: str, n: int, voter_v: str = "v1", system_v: str = "v1"):
+    if voter_v != system_v:
+        raise ValueError(
+            f"voter_v({voter_v}) != system_v({system_v}). 같은 버전 쌍만 허용."
+        )
+    political_context = load_context(voter_v)
+    system_template = load_system_prompt(system_v)
+    prompt = build_prompt(system_template)
+
     llm = ChatOpenAI(
         model=model_name, temperature=0.7,
         model_kwargs={"response_format": {"type": "json_object"}},
     )
     chain = prompt | llm
 
-    log_path = LOG_DIR / f"{time.strftime('%Y%m%d-%H%M%S')}_openai_{safe_filename(model_name)}.log"
+    log_path = LOG_DIR / f"{time.strftime('%Y%m%d-%H%M%S')}_openai_{safe_filename(model_name)}_{voter_v}_{system_v}.log"
     log_f = log_path.open("w", encoding="utf-8")
     def log(msg):
         print(msg, flush=True)
         log_f.write(msg + "\n"); log_f.flush()
 
-    log(f"=== openai/{model_name} × {n} ===")
+    log(f"=== openai/{model_name} × {n} (voter_context={voter_v}, system_prompt={system_v}) ===")
     success = 0
     for i in range(n):
         shard = random.choice(shards)
@@ -103,12 +145,12 @@ def run_loop(model_name: str, n: int):
         t0 = time.perf_counter()
         raw = ""
         try:
-            msg = chain.invoke({"political_context": POLITICAL_CONTEXT,
+            msg = chain.invoke({"political_context": political_context,
                                 "persona_card": persona_card(r)})
             raw = msg.content if hasattr(msg, "content") else str(msg)
             p = parse_response(raw)
-            vote = p.get("vote") or p.get("party") or p.get("정당") or p.get("투표")
-            reason = p.get("reason") or p.get("이유") or p.get("rationale")
+            vote = pick(p, VOTE_KEYS)
+            reason = pick(p, REASON_KEYS)
             if not vote or not reason:
                 raise ValueError(f"missing keys: {list(p.keys())}")
         except Exception as e:
@@ -124,10 +166,12 @@ def run_loop(model_name: str, n: int):
         success += 1
 
         ts = time.strftime("%Y%m%d-%H%M%S")
-        fname = f"{ts}_openai_{safe_filename(model_name)}_{r['uuid'][:8]}.json"
+        fname = f"{ts}_openai_{safe_filename(model_name)}_{r['uuid'][:8]}_{voter_v}_{system_v}.json"
         out = {
             "timestamp": ts,
             "model": f"openai/{model_name}",
+            "voter_context_version": voter_v,
+            "system_prompt_version": system_v,
             "persona_uuid": r["uuid"],
             "elapsed_sec": round(el, 3),
             "persona": {
@@ -161,6 +205,8 @@ def run_loop(model_name: str, n: int):
             "model": f"openai/{model_name}",
             "elapsed_sec": round(el, 3),
             "response_file": fname,
+            "voter_context_version": voter_v,
+            "system_prompt_version": system_v,
             # 풀 페르소나 10개 필드
             "professional_persona": r["professional_persona"],
             "sports_persona": r["sports_persona"],
@@ -185,6 +231,8 @@ def run_loop(model_name: str, n: int):
     log_f.close()
 
 if __name__ == "__main__":
+    # 사용: python _run_openai_batch.py <model> <n> [version]
     model = sys.argv[1]
     n = int(sys.argv[2])
-    run_loop(model, n)
+    v = sys.argv[3] if len(sys.argv) > 3 else "v1"
+    run_loop(model, n, voter_v=v, system_v=v)
