@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>페르소나 가상 투표 — 대시보드</title>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/@stlite/browser@0.85.1/build/stlite.css"
+  />
+  <style>
+    body { margin: 0; }
+    #loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #666;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .spinner {
+      width: 40px; height: 40px;
+      border: 3px solid #eee;
+      border-top-color: #004EA2;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .topnav {
+      position: fixed; top: 8px; left: 12px; z-index: 10000;
+      font: 0.82em -apple-system, sans-serif;
+    }
+    .topnav a { color: #888; text-decoration: none; }
+    .topnav a:hover { color: #004EA2; text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="topnav">
+    <a href="./index.html">← 메뉴</a> · <a href="./compare.html">🔍 페르소나 비교</a>
+  </div>
+  <div id="root">
+    <div id="loading">
+      <div class="spinner"></div>
+      <div>대시보드 로딩 중… (Pyodide 다운로드, 첫 방문 시 5~10초)</div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { mount } from "https://cdn.jsdelivr.net/npm/@stlite/browser@0.85.1/build/stlite.js";
+
+    // CSV + 모든 voter_context_v*.md / system_prompt_v*.md 자동 수집
+    const csvResp = await fetch("./backend/vote_results_all.csv");
+    const csvText = await csvResp.text();
+
+    // GitHub API로 context 폴더 파일 목록 조회 (정적 호스팅이라 디렉토리 listing 못 함)
+    // 간단히 v1, v2, ..., v9까지 시도해서 200 오는 것만 수집
+    async function collectVersions(prefix) {
+      const found = {};
+      for (let i = 1; i <= 9; i++) {
+        const r = await fetch(`./backend/context/${prefix}_v${i}.md`);
+        if (r.ok) found[`v${i}`] = await r.text();
+      }
+      return found;
+    }
+    const voterCtxFiles = await collectVersions("voter_context");
+    const systemPromptFiles = await collectVersions("system_prompt");
+
+    // dashboard.py 본문 (streamlit-autorefresh 제거 + 정적 페이지용 조정)
+    const appPy = `
+from datetime import datetime
+import pandas as pd
+import plotly.express as px
+import streamlit as st
+
+PARTY_COLORS = {
+    "더불어민주당": "#004EA2",
+    "국민의힘": "#E61E2B",
+    "개혁신당": "#FF7920",
+    "조국혁신당": "#06275E",
+    "진보당": "#D6001C",
+    "자유통일당": "#8E44AD",
+    "무당층/기권": "#9E9E9E",
+}
+
+st.set_page_config(page_title="페르소나 투표 실험", page_icon="🗳️", layout="wide")
+
+@st.cache_data
+def load_data() -> pd.DataFrame:
+    df = pd.read_csv("vote_results_all.csv", encoding="utf-8-sig")
+    df["age_bucket"] = pd.cut(
+        df["age"], bins=[0, 29, 39, 49, 59, 69, 200],
+        labels=["20대", "30대", "40대", "50대", "60대", "70+"],
+    )
+    return df
+
+df = load_data()
+
+st.title("🗳️ 페르소나 가상 투표 실험")
+st.markdown(
+    "<div style='color:#888;font-size:0.9em;margin-bottom:8px'>"
+    "합성 페르소나(Nemotron-Personas-Korea) 기반 LLM 투표 시뮬레이션 · "
+    "<a href='https://github.com/vuski/persona-million' target='_blank' "
+    "style='color:#888;text-decoration:underline'>github.com/vuski/persona-million</a>"
+    "</div>",
+    unsafe_allow_html=True,
+)
+st.caption(f"데이터: vote_results_all.csv · {len(df):,}건")
+
+import os, re
+def _list_versions(prefix):
+    pat = re.compile(rf"^{re.escape(prefix)}_v(\\\\d+)\\\\.md$")
+    out = []
+    for fn in os.listdir("."):
+        m = pat.match(fn)
+        if m: out.append(f"v{m.group(1)}")
+    return sorted(out, key=lambda v: int(v[1:]))
+
+voter_versions = _list_versions("voter_context")
+system_versions = _list_versions("system_prompt")
+
+with st.expander("📋 LLM에 주입한 컨텍스트·시스템 프롬프트 (버전별)"):
+    tab1, tab2 = st.tabs(["voter_context", "system_prompt"])
+    with tab1:
+        if voter_versions:
+            v = st.selectbox("voter_context 버전", voter_versions, key="voter_v_view")
+            if v:
+                with open(f"voter_context_{v}.md", encoding="utf-8") as f:
+                    st.markdown(f.read())
+        else:
+            st.info("voter_context_v*.md 파일 없음")
+    with tab2:
+        if system_versions:
+            s = st.selectbox("system_prompt 버전", system_versions, key="system_v_view")
+            if s:
+                with open(f"system_prompt_{s}.md", encoding="utf-8") as f:
+                    st.markdown(f.read())
+        else:
+            st.info("system_prompt_v*.md 파일 없음")
+
+if df.empty:
+    st.warning("데이터 없음")
+    st.stop()
+
+c1, c2, c3, c4 = st.columns(4)
+c1.metric("총 응답 수", f"{len(df):,}")
+c2.metric("모델 수", df["model"].nunique())
+c3.metric("평균 응답시간", f"{df['elapsed_sec'].mean():.1f}s")
+c4.metric("고유 페르소나", df["persona_uuid"].nunique())
+
+st.divider()
+st.subheader("모델별 비교")
+
+compare_mode = st.radio(
+    "비교 단위",
+    options=["모델만", "모델 × 버전"],
+    horizontal=True,
+    key="compare_mode",
+)
+df["version"] = df["voter_context_version"].fillna("?")
+
+col_a, col_b = st.columns([2, 1])
+
+with col_a:
+    if compare_mode == "모델 × 버전":
+        pivot = df.groupby(["model", "version", "vote"]).size().reset_index(name="count")
+        pivot["pct"] = pivot.groupby(["model", "version"])["count"].transform(
+            lambda x: x / x.sum() * 100
+        )
+        fig = px.bar(
+            pivot, x="version", y="pct", color="vote",
+            facet_col="model",
+            color_discrete_map=PARTY_COLORS,
+            labels={"pct": "득표율 (%)", "version": "", "vote": "정당"},
+            title="모델 × 버전별 정당 득표율", barmode="stack",
+        )
+        fig.update_layout(height=420, legend_title="")
+        fig.for_each_annotation(lambda a: a.update(text=a.text.split("=")[-1]))
+    else:
+        pivot = df.groupby(["model", "vote"]).size().reset_index(name="count")
+        pivot["pct"] = pivot.groupby("model")["count"].transform(lambda x: x / x.sum() * 100)
+        fig = px.bar(
+            pivot, x="model", y="pct", color="vote",
+            color_discrete_map=PARTY_COLORS,
+            labels={"pct": "득표율 (%)", "model": "모델", "vote": "정당"},
+            title="모델별 정당 득표율", barmode="stack",
+            text=pivot["pct"].round(1).astype(str) + "%",
+        )
+        fig.update_traces(textposition="inside")
+        fig.update_layout(height=400, legend_title="")
+    st.plotly_chart(fig, use_container_width=True)
+
+with col_b:
+    if compare_mode == "모델 × 버전":
+        timing = (
+            df.groupby(["model", "version"])["elapsed_sec"]
+            .agg(["mean", "count"]).reset_index()
+        )
+        timing.columns = ["model", "버전", "평균시간(s)", "응답수"]
+        fig2 = px.bar(
+            timing, x="model", y="평균시간(s)", color="버전",
+            barmode="group",
+            title="평균 응답시간 (모델 × 버전)",
+            text=timing["평균시간(s)"].round(1),
+        )
+    else:
+        timing = df.groupby("model")["elapsed_sec"].agg(["mean", "count"]).reset_index()
+        timing.columns = ["model", "평균시간(s)", "응답수"]
+        fig2 = px.bar(
+            timing, x="model", y="평균시간(s)",
+            title="모델별 평균 응답시간",
+            text=timing["평균시간(s)"].round(1),
+        )
+    fig2.update_traces(textposition="outside")
+    fig2.update_layout(height=400, showlegend=(compare_mode == "모델 × 버전"))
+    st.plotly_chart(fig2, use_container_width=True)
+    st.dataframe(timing, hide_index=True, use_container_width=True)
+
+st.divider()
+st.subheader("인구통계 교차분석")
+
+fcols_v = st.columns(3)
+with fcols_v[0]:
+    model_filter = st.multiselect(
+        "모델", options=sorted(df["model"].unique()),
+        default=sorted(df["model"].unique()),
+    )
+with fcols_v[1]:
+    voter_opts = sorted(df["voter_context_version"].dropna().unique()) if "voter_context_version" in df.columns else []
+    voter_filter = st.multiselect("voter_context 버전", options=voter_opts, default=voter_opts)
+with fcols_v[2]:
+    sys_opts = sorted(df["system_prompt_version"].dropna().unique()) if "system_prompt_version" in df.columns else []
+    sys_filter = st.multiselect("system_prompt 버전", options=sys_opts, default=sys_opts)
+
+df_filt = df[df["model"].isin(model_filter)]
+if voter_opts:
+    df_filt = df_filt[df_filt["voter_context_version"].isin(voter_filter)]
+if sys_opts:
+    df_filt = df_filt[df_filt["system_prompt_version"].isin(sys_filter)]
+
+if not df_filt.empty:
+    col1, col2, col3 = st.columns(3)
+    for col, dim, title in [
+        (col1, "age_bucket", "연령대 × 정당"),
+        (col2, "province",   "지역(시도) × 정당"),
+        (col3, "sex",        "성별 × 정당"),
+    ]:
+        agg = df_filt.groupby([dim, "vote"]).size().reset_index(name="count")
+        fig = px.bar(
+            agg, x=dim, y="count", color="vote",
+            color_discrete_map=PARTY_COLORS,
+            labels={"count": "응답 수", dim: ""},
+            title=title, barmode="stack",
+        )
+        fig.update_layout(height=350, legend_title="", showlegend=(col is col3))
+        col.plotly_chart(fig, use_container_width=True)
+
+st.divider()
+st.subheader("응답 보기")
+
+fcols = st.columns(5)
+sex_opts = sorted(df["sex"].dropna().unique())
+age_opts = ["20대", "30대", "40대", "50대", "60대", "70+"]
+prov_opts = sorted(df["province"].dropna().unique())
+occ_opts = sorted(df["occupation"].dropna().unique())
+edu_opts = sorted(df["education_level"].dropna().unique())
+
+with fcols[0]:
+    f_sex = st.multiselect("성별", sex_opts, default=[], placeholder="전체")
+with fcols[1]:
+    f_age = st.multiselect("연령대", age_opts, default=[], placeholder="전체")
+with fcols[2]:
+    f_prov = st.multiselect("시도", prov_opts, default=[], placeholder="전체")
+with fcols[3]:
+    f_occ = st.multiselect("직업", occ_opts, default=[], placeholder="전체")
+with fcols[4]:
+    f_edu = st.multiselect("학력", edu_opts, default=[], placeholder="전체")
+
+dfr = df.copy()
+if f_sex:  dfr = dfr[dfr["sex"].isin(f_sex)]
+if f_age:  dfr = dfr[dfr["age_bucket"].isin(f_age)]
+if f_prov: dfr = dfr[dfr["province"].isin(f_prov)]
+if f_occ:  dfr = dfr[dfr["occupation"].isin(f_occ)]
+if f_edu:  dfr = dfr[dfr["education_level"].isin(f_edu)]
+
+st.caption(f"필터 결과: {len(dfr):,} / {len(df):,}건")
+n_recent = st.slider("표시 개수", 5, 50, 10)
+recent = dfr.tail(n_recent).iloc[::-1]
+
+for _, r in recent.iterrows():
+    party_color = PARTY_COLORS.get(r["vote"], "#666")
+    with st.container(border=True):
+        cols = st.columns([3, 1])
+        with cols[0]:
+            voter_v = r.get("voter_context_version", "")
+            sys_v = r.get("system_prompt_version", "")
+            ver_badge = ""
+            if voter_v or sys_v:
+                ver_badge = (
+                    f" <span style='color:#999;font-weight:300;font-size:0.8em'>"
+                    f"voter:{voter_v} · system:{sys_v}</span>"
+                )
+            st.markdown(
+                f"**\`{r['model']}\`**{ver_badge} "
+                f"<span style='color:#999;font-weight:300;font-size:0.85em'>persona_uuid</span> "
+                f"<code style='color:#999;font-size:0.85em;background:transparent;padding:0'>"
+                f"{r['persona_uuid']}</code>",
+                unsafe_allow_html=True,
+            )
+            profile_pairs = [
+                ("성별", r["sex"]), ("연령", f"{r['age']}세"),
+                ("혼인", r["marital_status"]),
+                ("가구", r["family_type"]), ("주거", r["housing_type"]),
+                ("학력", r["education_level"]), ("전공", r["bachelors_field"]),
+                ("직업", r["occupation"]),
+                ("지역", f"{r['province']} {r['district']}"),
+            ]
+            profile_html = "<div style='font-size:0.85em;line-height:1.6;margin:2px 0'>"
+            profile_html += " · ".join(
+                f"<span style='color:#999;font-weight:300'>{k}</span> "
+                f"<b style='color:inherit'>{v}</b>"
+                for k, v in profile_pairs
+            )
+            profile_html += "</div>"
+            st.markdown(profile_html, unsafe_allow_html=True)
+
+            st.markdown(
+                f"<div style='color:#888;font-size:0.9em;margin:4px 0 8px 0'>"
+                f"{r['persona_summary']}</div>",
+                unsafe_allow_html=True,
+            )
+
+            full_pairs = [
+                ("직업적 면모", "professional_persona"),
+                ("가족 면모", "family_persona"),
+                ("문화적 배경", "cultural_background"),
+                ("스포츠", "sports_persona"),
+                ("예술", "arts_persona"),
+                ("여행", "travel_persona"),
+                ("음식", "culinary_persona"),
+                ("관심사", "hobbies_and_interests"),
+                ("숙련·전문성", "skills_and_expertise"),
+                ("목표·포부", "career_goals_and_ambitions"),
+            ]
+            full_pairs = [(k, r[c]) for k, c in full_pairs if c in r and pd.notna(r[c])]
+            if full_pairs:
+                with st.expander("페르소나 자세히 보기"):
+                    for k, v in full_pairs:
+                        st.markdown(
+                            f"<div style='margin:6px 0'>"
+                            f"<span style='color:#999;font-weight:300;font-size:0.85em'>{k}</span><br/>"
+                            f"<span style='font-size:0.9em'>{v}</span></div>",
+                            unsafe_allow_html=True,
+                        )
+
+            st.markdown(
+                f"<span style='background:{party_color};color:white;padding:2px 8px;"
+                f"border-radius:4px;font-weight:bold'>{r['vote']}</span>",
+                unsafe_allow_html=True,
+            )
+            st.markdown(f"_{r['reason']}_")
+        with cols[1]:
+            st.metric("응답시간", f"{r['elapsed_sec']:.1f}s")
+
+st.divider()
+with st.expander("원본 데이터 (전체 행)"):
+    st.dataframe(
+        df[["persona_uuid", "model", "vote", "sex", "age", "province",
+            "district", "occupation", "education_level", "reason", "elapsed_sec"]],
+        hide_index=True, use_container_width=True, height=400,
+    )
+`;
+
+    mount({
+      requirements: ["pandas", "plotly"],
+      entrypoint: "app.py",
+      files: {
+        "app.py": appPy,
+        "vote_results_all.csv": csvText,
+        ...Object.fromEntries(Object.entries(voterCtxFiles).map(
+          ([v, txt]) => [`voter_context_${v}.md`, txt]
+        )),
+        ...Object.fromEntries(Object.entries(systemPromptFiles).map(
+          ([v, txt]) => [`system_prompt_${v}.md`, txt]
+        )),
+      },
+    }, document.getElementById("root"));
+  </script>
+</body>
+</html>
