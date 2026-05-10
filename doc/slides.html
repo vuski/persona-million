@@ -1,0 +1,881 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>페르소나 가상 투표 — 발표 슬라이드</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" id="theme" />
+  <style>
+    :root {
+      --accent: #004EA2;
+      --accent-2: #E61E2B;
+      --muted: #6b6b6b;
+      --soft: #f5f5f7;
+      --border: #e5e5e5;
+      --party-min: #004EA2;
+      --party-kuk: #E61E2B;
+      --party-gae: #FF7920;
+      --party-jo: #06275E;
+      --party-jin: #D6001C;
+      --party-ja: #8E44AD;
+      --party-mu: #9E9E9E;
+      --fictional: #d4a017;
+    }
+
+    .reveal {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+      font-size: 28px;
+      color: #222;
+    }
+    .reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+      color: #111;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      text-transform: none;
+      margin-top: 0;
+    }
+    .reveal h1 { font-size: 2.0em; line-height: 1.15; }
+    .reveal h2 { font-size: 1.45em; line-height: 1.2; margin-bottom: 0.6em; }
+    .reveal h3 { font-size: 1.05em; color: var(--accent); margin: 0.5em 0 0.4em; }
+    .reveal p, .reveal li { line-height: 1.55; }
+    .reveal a { color: var(--accent); }
+    .reveal code {
+      background: var(--soft);
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 0.85em;
+      font-family: "SF Mono", Menlo, Consolas, monospace;
+    }
+    .reveal pre {
+      box-shadow: none;
+      background: var(--soft);
+      border-radius: 8px;
+    }
+    .reveal pre code {
+      padding: 16px 18px;
+      font-size: 0.62em;
+      line-height: 1.5;
+      max-height: 460px;
+    }
+    .reveal section { text-align: left; }
+    .reveal section.center { text-align: center; }
+    /* 슬라이드 모드일 때 내용이 넘치면 안에서 스크롤 */
+    .reveal .slides > section {
+      max-height: 100vh;
+      overflow-y: auto;
+    }
+    /* 스크롤 모드에선 본래 그대로 흘려보냄 */
+    body.scroll-mode .reveal .slides > section { max-height: none; overflow: visible; }
+
+    .subtitle { color: var(--muted); font-size: 0.95em; margin-top: 0.2em; }
+    .meta { color: var(--muted); font-size: 0.78em; margin-top: 1.2em; }
+    .muted { color: var(--muted); }
+    .accent { color: var(--accent); font-weight: 600; }
+    .tag {
+      display: inline-block;
+      background: var(--soft);
+      color: var(--muted);
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 0.72em;
+      letter-spacing: 0.02em;
+      margin-right: 6px;
+    }
+    .tag.fictional {
+      background: var(--fictional);
+      color: white;
+    }
+
+    table.dist {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 0.78em;
+      margin-top: 0.4em;
+    }
+    table.dist th, table.dist td {
+      padding: 7px 10px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+    table.dist th { color: var(--muted); font-weight: 600; }
+    table.dist td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    table.dist tr.headline td { font-weight: 700; }
+
+    .bar {
+      display: flex; align-items: center; gap: 8px;
+      margin: 4px 0; font-size: 0.78em;
+    }
+    .bar .label { width: 110px; text-align: right; font-weight: 600; }
+    .bar .track {
+      flex: 1; background: white; border: 1px solid var(--border);
+      height: 18px; border-radius: 4px; position: relative;
+    }
+    .bar .fill { height: 100%; border-radius: 3px; }
+    .bar .num { width: 70px; color: #333; font-variant-numeric: tabular-nums; }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+    .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 22px; }
+
+    blockquote.callout {
+      border-left: 4px solid var(--accent);
+      background: var(--soft);
+      padding: 10px 14px;
+      margin: 0.5em 0;
+      font-size: 0.88em;
+      line-height: 1.45;
+      color: #333;
+    }
+    blockquote.callout p { margin: 0.3em 0; }
+
+    .v6-frame {
+      border: 2px dashed var(--fictional);
+      background: #fffbe6;
+      padding: 14px 16px;
+      border-radius: 8px;
+    }
+
+    iframe.embed {
+      width: 100%;
+      height: 540px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    /* sticky 섹션 헤더 — 스크롤 모드에서 보이게 */
+    #sticky-title-bar {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 28px;
+      z-index: 1000;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #222;
+      letter-spacing: -0.005em;
+    }
+    #sticky-title-bar .ord {
+      color: var(--muted);
+      font-weight: 400;
+      margin-right: 10px;
+      font-variant-numeric: tabular-nums;
+    }
+    #sticky-title-bar .topic {
+      color: var(--accent);
+      margin-right: 10px;
+    }
+    body.scroll-mode #sticky-title-bar { display: block; }
+
+    /* 좌상단 메뉴 링크 */
+    .topnav {
+      position: fixed; top: 8px; left: 12px; z-index: 1100;
+      font: 0.78em -apple-system, sans-serif;
+    }
+    .topnav a { color: #888; text-decoration: none; }
+    .topnav a:hover { color: var(--accent); text-decoration: underline; }
+    body.scroll-mode .topnav { top: 14px; right: 24px; left: auto; }
+  </style>
+</head>
+<body>
+  <div class="topnav">
+    <a href="../index.html">← 메뉴</a> ·
+    <a href="../dashboard.html">📊 대시보드</a> ·
+    <a href="../compare.html">🔍 비교</a>
+  </div>
+
+  <div id="sticky-title-bar">
+    <span class="ord" id="sticky-ord"></span>
+    <span class="topic" id="sticky-topic"></span>
+    <span id="sticky-title"></span>
+  </div>
+
+  <div class="reveal">
+    <div class="slides">
+
+      <!-- 1. 타이틀 -->
+      <section class="center" data-topic="0. 시작" data-title="타이틀">
+        <h1>페르소나-LLM 투표 시뮬레이션</h1>
+        <p class="subtitle">NVIDIA Nemotron-Personas-Korea 1M 데이터로<br/>
+          컨텍스트 ablation 6단계, 모델 7종, 응답 1,524건의 실험기</p>
+        <p class="meta">
+          vuski · 2026-04<br/>
+          <a href="https://github.com/vuski/persona-million" target="_blank">github.com/vuski/persona-million</a> ·
+          <a href="https://vuski.github.io/persona-million" target="_blank">vuski.github.io/persona-million</a>
+        </p>
+      </section>
+
+      <!-- 2. 동기 -->
+      <section data-topic="1. 동기" data-title="왜 해봤나">
+        <h2>왜 해봤나</h2>
+        <ul>
+          <li>선거철 — LLM 여론조사 논의가 늘어남</li>
+          <li>"백씽킹불여일행" — <span class="accent">테스트 비용이 너무 저렴해서, 일단 해보고 판단</span></li>
+          <li>NVIDIA가 한국인 합성 페르소나 100만 건을 HuggingFace 공개 (Nemotron-Personas-Korea)</li>
+          <li>이 페르소나-LLM 조합으로 정치 의사결정을 어디까지 흉내낼 수 있는가?</li>
+        </ul>
+        <blockquote class="callout">
+          "결과로서가 아니라 컨텍스트 생성 도구로서" LLM을 쓰는 게 더 맞지 않을까 — 실험을 통해 검증
+        </blockquote>
+      </section>
+
+      <!-- 3. 셋업 -->
+      <section data-topic="2. 셋업" data-title="데이터·모델·도구">
+        <h2>데이터 · 모델 · 도구</h2>
+        <div class="grid-3">
+          <div>
+            <h3>페르소나</h3>
+            <p>NVIDIA Nemotron-Personas-Korea<br/>
+              합성 한국인 1M, 22개 인구·서사 필드</p>
+          </div>
+          <div>
+            <h3>LLM</h3>
+            <p>OpenAI: gpt-5.4 / 5.4-mini / 5.5<br/>
+              로컬(ollama): gemma3:27b / exaone4.0:32b / qwen3:32b<br/>
+              Anthropic: claude-haiku-4-5</p>
+          </div>
+          <div>
+            <h3>오케스트레이션</h3>
+            <p>LangChain · Jupyter · Claude Code 에이전트(병렬 WebSearch / 정당 리서치)<br/>
+              총 <span class="accent">1,524건</span> 응답 수집</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. 1차 — 모델 비교 -->
+      <section data-topic="3. 1차 실험" data-title="모델 비교 (v1)">
+        <h2>1차 — 모델 비교 (180명, v1 컨텍스트)</h2>
+        <p class="muted">모델당 30명, 간소한 정치 상황 + 지역 강세 단서</p>
+        <table class="dist">
+          <thead><tr><th>모델</th><th class="num">민주당</th><th class="num">국힘</th><th class="num">기권</th><th>비고</th></tr></thead>
+          <tbody>
+            <tr><td>openai/gpt-5.4</td>            <td class="num">77%</td><td class="num">20%</td><td class="num">3%</td><td>OpenAI 친민주 경향</td></tr>
+            <tr><td>openai/gpt-5.4-mini</td>       <td class="num">61%</td><td class="num">36%</td><td class="num">2%</td><td></td></tr>
+            <tr><td>openai/gpt-5.5</td>            <td class="num">60%</td><td class="num">37%</td><td class="num">3%</td><td></td></tr>
+            <tr><td>ollama/gemma3:27b</td>         <td class="num">78%</td><td class="num">8%</td> <td class="num">11%</td><td>가장 친민주</td></tr>
+            <tr><td>ollama/exaone4.0:32b</td>      <td class="num">20%</td><td class="num">27%</td><td class="num">40%</td><td>정치적으로 거세 / 기권 다수</td></tr>
+            <tr><td>ollama/qwen3:32b</td>          <td class="num">17%</td><td class="num">43%</td><td class="num">10%</td><td>알리바바 모델인데 국힘 우호 — 아이러니</td></tr>
+          </tbody>
+        </table>
+        <p class="meta">참고: 한국갤럽 4월 4주 — 민주 48% / 국힘 19% / 무당층 26%</p>
+      </section>
+
+      <!-- 5. 1차 관찰 -->
+      <section data-topic="3. 1차 실험" data-title="1차 관찰">
+        <h2>1차 관찰</h2>
+        <ul>
+          <li><span class="accent">모델 간 편차가 매우 큼</span> — 단일 모델 결과를 여론조사 대용으로 쓰기 어려움</li>
+          <li>원인은 외부에서 검증 어려움 — 학습 코퍼스·RLHF<span style="font-size:0.72em;color:var(--muted)"> (Reinforcement Learning from Human Feedback · 인간 피드백 기반 강화학습)</span> 가이드라인이 비공개라 비대칭의 메커니즘은 가설 수준에 머물 수밖에 없음</li>
+          <li>흥미로운 부산물: <span class="accent">연령·지역 분포는 OpenAI 모델들에서 "대략 그럴듯하게" 나옴</span> — 인구통계적 패턴은 잘 인지</li>
+          <li>그러나 결국 "그래서 누가 이긴다"는 적절한 활용이 아니라는 판단</li>
+        </ul>
+        <blockquote class="callout">
+          전환 — "결과를 추출하는 것보다 컨텍스트를 뽑아내는 도구로 LLM을 쓰는 게 더 잘 쓰는 것 같다"
+        </blockquote>
+      </section>
+
+      <!-- 6. 방향 전환 -->
+      <section data-topic="4. 방향 전환" data-title="컨텍스트 ablation 설계">
+        <h2>2차 — 컨텍스트 ablation 설계 <span style="font-size:0.55em;color:var(--muted);font-weight:400">(어블레이션 · 한 변수만 바꿔가며 기여도를 측정하는 실험 기법)</span></h2>
+        <ul>
+          <li>대상: <span class="accent">동일한 100명</span> 페르소나 (gpt-5.4-mini 기준)</li>
+          <li>변수: voter_context / system_prompt 만 v2 → v3 → v4 → v5 → v6 으로 변경</li>
+          <li>v4·v5·v6 은 Anthropic claude-haiku-4-5 도 병렬 실행 (모델 교차 검증)</li>
+          <li>각 버전 100건 × 6 = 600+건 응답</li>
+        </ul>
+        <h3>버전별 변화 한 줄 요약</h3>
+        <table class="dist">
+          <tr><td><b>v2</b></td><td>페르소나 디테일 인용·trade-off 강제 + 지역/세대 단서 포함</td></tr>
+          <tr><td><b>v3</b></td><td>v2 − 지역·세대 단서 제거</td></tr>
+          <tr><td><b>v4</b></td><td>v3 + 페르소나별 1인칭 정치 이해관계 투입 (각자 WebSearch 10회)</td></tr>
+          <tr><td><b>v5</b></td><td>v4 + 정당 정책 풍부화 + 정당↔이해관계 매칭 강제</td></tr>
+          <tr><td><b>v6</b></td><td>v5 + 권력 시그널 뒤집기 (가상 — 국힘 여당 160석)</td></tr>
+        </table>
+      </section>
+
+      <!-- 6b. v2의 두 가지 강제 장치 -->
+      <section data-topic="4. 방향 전환" data-title="v2의 두 가지 강제 장치">
+        <h2>v2의 두 가지 강제 장치</h2>
+        <p class="muted">v1 답변이 너무 평면적이고 "이 사람 = 인구통계 라벨" 식이라서, system_prompt 차원에서 두 장치를 추가.</p>
+
+        <div class="grid-2">
+          <div>
+            <h3>① 페르소나 디테일 인용 강제</h3>
+            <p>답변(reason) 본문에 다음 5가지 중 <span class="accent">최소 두 가지를 반드시 직접 인용</span>:</p>
+            <ul style="font-size:0.88em">
+              <li>직업적 면모 — 특정 업무 경험, 직장에서 마주치는 현실</li>
+              <li>가족 면모 — 돌봄 대상, 가구 형태에서 오는 일상 부담</li>
+              <li>문화적 배경 — 살아온 동네, 세대 경험</li>
+              <li>관심사·취미 — 주말 활동, 좋아하는 것</li>
+              <li>목표·포부 — 이 인물이 미래에 바라는 것</li>
+            </ul>
+            <blockquote class="callout" style="font-size:0.82em">
+              "지역이라서", "세대라서" 같은 인구통계적 일반화에만 의존하지 말 것.
+            </blockquote>
+          </div>
+
+          <div>
+            <h3>② trade-off 명시 강제</h3>
+            <p>이 인물이 <span class="accent">다른 선택지를 두고 왜 이 정당을 골랐는지</span> —<br/>
+              무엇을 우선했고 무엇을 포기했는지가 reason 안에 드러나야 함.</p>
+            <blockquote class="callout" style="font-size:0.85em">
+              "○○당이 좋아 보인다"가 아니라<br/>
+              "<b>△△ 때문에 ○○당을 택하지만 □□ 점은 마음에 걸린다</b>"<br/>
+              식의 갈등이 들어가는 게 자연스럽다.
+            </blockquote>
+            <p class="meta">결과의 신뢰성보다 <span class="accent">reason 텍스트의 질</span>을 높이기 위한 장치 — 분석 시 "왜 이렇게 답했는가"를 추적 가능하게.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. v2 vs v3 -->
+      <section data-topic="5. ablation" data-title="v2 → v3: 편향 단서 제거">
+        <h2>v2 → v3: 편향 단서 제거</h2>
+        <p class="muted">voter_context 에서 "## 지역별 통상적 정치 지형" + "## 세대별 일반 경향" 두 섹션만 제거. 나머지는 동일.</p>
+        <div class="grid-2">
+          <div>
+            <h3>v2</h3>
+            <div class="bar"><span class="label">국민의힘</span><div class="track"><div class="fill" style="width:100%;background:var(--party-kuk)"></div></div><span class="num">42%</span></div>
+            <div class="bar"><span class="label">더불어민주당</span><div class="track"><div class="fill" style="width:95.2%;background:var(--party-min)"></div></div><span class="num">40%</span></div>
+            <div class="bar"><span class="label">무당층/기권</span><div class="track"><div class="fill" style="width:23.8%;background:var(--party-mu)"></div></div><span class="num">10%</span></div>
+            <div class="bar"><span class="label">개혁신당</span><div class="track"><div class="fill" style="width:19%;background:var(--party-gae)"></div></div><span class="num">8%</span></div>
+          </div>
+          <div>
+            <h3>v3</h3>
+            <div class="bar"><span class="label">더불어민주당</span><div class="track"><div class="fill" style="width:100%;background:var(--party-min)"></div></div><span class="num">49%</span></div>
+            <div class="bar"><span class="label">국민의힘</span><div class="track"><div class="fill" style="width:75.5%;background:var(--party-kuk)"></div></div><span class="num">37%</span></div>
+            <div class="bar"><span class="label">개혁신당</span><div class="track"><div class="fill" style="width:18.4%;background:var(--party-gae)"></div></div><span class="num">9%</span></div>
+            <div class="bar"><span class="label">무당층/기권</span><div class="track"><div class="fill" style="width:10.2%;background:var(--party-mu)"></div></div><span class="num">5%</span></div>
+          </div>
+        </div>
+        <blockquote class="callout">
+          단 두 줄 ("호남=민주 / TK=국힘", "60대=보수 강세")을 제거했을 뿐인데<br/>
+          민주 +9%p, 국힘 −5%p, 무당층 −5%p — 결과가 정책 기반 판단으로 이동
+        </blockquote>
+      </section>
+
+      <!-- 8. v4: 페르소나 풍부화 -->
+      <section data-topic="5. ablation" data-title="v4: 페르소나 정치 이해관계 투입">
+        <h2>v4: 페르소나별 1인칭 정치 이해관계 투입</h2>
+        <p class="muted">각 페르소나에게 Claude Code 에이전트가 본인 입장에서 2026년 기사를 최대 10번 검색,
+          평균 633자의 1인칭 회고를 생성해서 페르소나 카드에 합침.</p>
+        <div class="grid-2">
+          <div>
+            <h3>예시 (포항 제도사·59세)</h3>
+            <blockquote class="callout" style="font-size:0.78em">
+              올해 쉰아홉, 정년이 코앞이다. … 단지 내 철강 가동률이 60~70%까지 떨어졌다는 소리…
+              요새 정년 65세 연장 법안이 국회에 걸려 있다는데, 단계적이라 2029년부터라느니… 솔직히 나 같은 66년생한텐 그림의 떡이다.
+              60에 잘리고 65세 연금까지 5년이 비는 건 내 얘기다. 국민연금 보험료율도 올해부터 9.5%로 올랐다…
+            </blockquote>
+          </div>
+          <div>
+            <h3>v4 결과</h3>
+            <div class="bar"><span class="label">더불어민주당</span><div class="track"><div class="fill" style="width:100%;background:var(--party-min)"></div></div><span class="num">79%</span></div>
+            <div class="bar"><span class="label">국민의힘</span><div class="track"><div class="fill" style="width:13.9%;background:var(--party-kuk)"></div></div><span class="num">11%</span></div>
+            <div class="bar"><span class="label">개혁신당</span><div class="track"><div class="fill" style="width:10.1%;background:var(--party-gae)"></div></div><span class="num">8%</span></div>
+            <p class="meta">v3 대비 민주 +30%p — 페르소나에 "정치적 자기 정렬"을 추가했더니 한 쪽으로 크게 쏠림</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 9. v5: 정당 풍부화 -->
+      <section data-topic="5. ablation" data-title="v5: 정당 정책 풍부화 + 매칭 강제">
+        <h2>v5: 정당 정책 풍부화 + 매칭 강제</h2>
+        <p class="muted">Claude Sonnet 6개 병렬 에이전트가 각 정당을 WebSearch 10회씩 리서치 → 정책 위주 ~500자 정당 카드 6개.
+          system_prompt에 "정치적 이해관계 ↔ 정당 강령을 직접 매칭하는 것이 1순위"를 명시.</p>
+        <div class="grid-2">
+          <div>
+            <h3>설계 의도</h3>
+            <ul>
+              <li>v4의 페르소나 풍부화에 대응하는 <b>공통 컨텍스트</b> 보강</li>
+              <li>지역·연령 등 인구통계적 휴리스틱 대신 <b>정책 매칭</b>으로 결정</li>
+              <li>무당층 억제 ("정 안되면 기권")</li>
+            </ul>
+          </div>
+          <div>
+            <h3>v5 결과</h3>
+            <div class="bar"><span class="label">더불어민주당</span><div class="track"><div class="fill" style="width:100%;background:var(--party-min)"></div></div><span class="num">93%</span></div>
+            <div class="bar"><span class="label">국민의힘</span><div class="track"><div class="fill" style="width:6.5%;background:var(--party-kuk)"></div></div><span class="num">6%</span></div>
+            <p class="meta">v4 대비 민주 +14%p — 정책 매칭을 강제할수록 결과가 더 극단으로</p>
+            <p class="muted" style="font-size:0.82em">100명의 페르소나가 100명 국민을 대변한다고 가정하면, 국민의힘이 정책적으로도 민심을 잡지 못한다는 해석도 가능.<br/>
+              단 가정의 신뢰성이 매우 낮음.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10. v6: 권력 시그널 뒤집기 -->
+      <section data-topic="5. ablation" data-title="v6: 권력 시그널 뒤집기 (반사실)">
+        <h2>v6: 권력 시그널 뒤집기 <span class="tag fictional">가상 시나리오</span></h2>
+        <p class="muted">정당 정책 문구는 v5 그대로. 권력 라벨만 뒤집음.</p>
+        <div class="v6-frame">
+          <ul style="margin:0">
+            <li>대통령: <b>장재현</b> (가상, 국민의힘) — 2025-06 취임</li>
+            <li>여당: 국민의힘 / 의석 수: 국민의힘 160석, 더불어민주당 107석</li>
+            <li>"이재명 정부 1호 과제 → 더불어민주당의 핵심 의제"로 표현 조정</li>
+          </ul>
+        </div>
+        <div class="grid-2" style="margin-top:1em">
+          <div>
+            <h3>v5 (실제)</h3>
+            <div class="bar"><span class="label">더불어민주당</span><div class="track"><div class="fill" style="width:100%;background:var(--party-min)"></div></div><span class="num">93%</span></div>
+            <div class="bar"><span class="label">국민의힘</span><div class="track"><div class="fill" style="width:6.5%;background:var(--party-kuk)"></div></div><span class="num">6%</span></div>
+          </div>
+          <div>
+            <h3>v6 (가상)</h3>
+            <div class="bar"><span class="label">더불어민주당</span><div class="track"><div class="fill" style="width:100%;background:var(--party-min)"></div></div><span class="num">63%</span></div>
+            <div class="bar"><span class="label">국민의힘</span><div class="track"><div class="fill" style="width:46%;background:var(--party-kuk)"></div></div><span class="num">29%</span></div>
+            <div class="bar"><span class="label">개혁신당</span><div class="track"><div class="fill" style="width:9.5%;background:var(--party-gae)"></div></div><span class="num">6%</span></div>
+          </div>
+        </div>
+        <blockquote class="callout">
+          "현 정권" 라벨만 바꿔도 국힘 +23%p — LLM 의사결정에 권력 시그널은 강력한 변수.<br/>
+          그러나 v6에서도 민주가 2배 이상 우위 → 정책 매칭 효과가 권력 시그널을 누르고도 남음.
+        </blockquote>
+      </section>
+
+      <!-- 11. 종합 비교 -->
+      <section data-topic="5. ablation" data-title="ablation 종합">
+        <h2>ablation 종합</h2>
+        <table class="dist">
+          <thead><tr><th>버전</th><th class="num">민주</th><th class="num">국힘</th><th class="num">개혁신당</th><th class="num">무당층</th><th>변화 한 줄</th></tr></thead>
+          <tbody>
+            <tr><td><b>v2</b></td><td class="num">40%</td><td class="num">42%</td><td class="num">8%</td><td class="num">10%</td><td>지역/세대 단서 포함</td></tr>
+            <tr><td><b>v3</b></td><td class="num">49%</td><td class="num">37%</td><td class="num">9%</td><td class="num">5%</td><td>지역/세대 단서 제거 → 정책 기반 이동</td></tr>
+            <tr><td><b>v4</b></td><td class="num">79%</td><td class="num">11%</td><td class="num">8%</td><td class="num">1%</td><td>페르소나별 정치 이해관계 투입</td></tr>
+            <tr class="headline"><td><b>v5</b></td><td class="num">93%</td><td class="num">6%</td><td class="num">0%</td><td class="num">0%</td><td>정당 정책 풍부화 + 매칭 강제 — 가장 극단</td></tr>
+            <tr><td><b>v6</b></td><td class="num">63%</td><td class="num">29%</td><td class="num">6%</td><td class="num">0%</td><td>v5 + 권력 시그널 뒤집기 (가상)</td></tr>
+          </tbody>
+        </table>
+        <p class="meta">동일 100명 · gpt-5.4-mini · 한국갤럽 4월 4주(민주 48% / 국힘 19%) 와의 비교 참고</p>
+        <blockquote class="callout">
+          핵심 관찰 — <b>이 모델은 컨텍스트 한 두 줄에 매우 민감</b>. 작은 변경으로 분포가 수십 %p 단위로 흔들린다.
+        </blockquote>
+      </section>
+
+      <!-- 12. 모델 교차 검증 -->
+      <section data-topic="6. 교차" data-title="GPT vs Haiku 교차 검증">
+        <h2>모델 교차 검증 (gpt-5.4-mini vs claude-haiku-4-5)</h2>
+        <p class="muted">v4 / v5 / v6 동일 100명·동일 컨텍스트, 두 모델 병렬 실행. 표는 보조, 핵심은 옆 차트.</p>
+
+        <div class="grid-2" style="grid-template-columns: 0.85fr 1.15fr; align-items:flex-start">
+          <div>
+            <table class="dist" style="font-size:0.7em">
+              <thead><tr><th></th><th class="num">v4·gpt</th><th class="num">v4·haiku</th><th class="num">v5·gpt</th><th class="num">v5·haiku</th><th class="num">v6·gpt</th><th class="num">v6·haiku</th></tr></thead>
+              <tbody>
+                <tr><td>민주당</td>     <td class="num">79</td><td class="num">50</td><td class="num">93</td><td class="num">75</td><td class="num">63</td><td class="num">69</td></tr>
+                <tr><td>국힘</td>       <td class="num">11</td><td class="num">9</td> <td class="num">6</td> <td class="num">8</td> <td class="num">29</td><td class="num">15</td></tr>
+                <tr><td>무당층</td>     <td class="num">1</td> <td class="num">41</td><td class="num">0</td> <td class="num">12</td><td class="num">0</td> <td class="num">12</td></tr>
+              </tbody>
+            </table>
+            <p class="meta" style="margin-top:1em">단위: %. 동일 100명, 동일 컨텍스트.</p>
+          </div>
+
+          <div>
+            <!-- 차트 1: 민주당 비율 -->
+            <h3 style="margin-bottom:6px">① 민주당 비율 — Haiku는 항상 더 낮음</h3>
+            <div class="bar"><span class="label">v4·gpt</span><div class="track"><div class="fill" style="width:79%;background:var(--party-min)"></div></div><span class="num">79%</span></div>
+            <div class="bar"><span class="label">v4·haiku</span><div class="track"><div class="fill" style="width:50%;background:var(--party-min);opacity:.55"></div></div><span class="num">50%</span></div>
+            <div class="bar"><span class="label">v5·gpt</span><div class="track"><div class="fill" style="width:93%;background:var(--party-min)"></div></div><span class="num">93%</span></div>
+            <div class="bar"><span class="label">v5·haiku</span><div class="track"><div class="fill" style="width:75%;background:var(--party-min);opacity:.55"></div></div><span class="num">75%</span></div>
+            <div class="bar"><span class="label">v6·gpt</span><div class="track"><div class="fill" style="width:63%;background:var(--party-min)"></div></div><span class="num">63%</span></div>
+            <div class="bar"><span class="label">v6·haiku</span><div class="track"><div class="fill" style="width:69%;background:var(--party-min);opacity:.55"></div></div><span class="num">69%</span></div>
+
+            <!-- 차트 2: 무당층 -->
+            <h3 style="margin-top:18px;margin-bottom:6px">② 무당층/기권 — Haiku가 훨씬 많음 (모델의 응답 성향)</h3>
+            <div class="bar"><span class="label">v4·gpt</span><div class="track"><div class="fill" style="width:1%;background:var(--party-mu)"></div></div><span class="num">1%</span></div>
+            <div class="bar"><span class="label">v4·haiku</span><div class="track"><div class="fill" style="width:41%;background:var(--party-mu);opacity:.55"></div></div><span class="num">41%</span></div>
+            <div class="bar"><span class="label">v5·gpt</span><div class="track"><div class="fill" style="width:0%;background:var(--party-mu)"></div></div><span class="num">0%</span></div>
+            <div class="bar"><span class="label">v5·haiku</span><div class="track"><div class="fill" style="width:12%;background:var(--party-mu);opacity:.55"></div></div><span class="num">12%</span></div>
+            <div class="bar"><span class="label">v6·gpt</span><div class="track"><div class="fill" style="width:0%;background:var(--party-mu)"></div></div><span class="num">0%</span></div>
+            <div class="bar"><span class="label">v6·haiku</span><div class="track"><div class="fill" style="width:12%;background:var(--party-mu);opacity:.55"></div></div><span class="num">12%</span></div>
+
+            <!-- 차트 3: v5→v6 권력 시그널 반응 -->
+            <h3 style="margin-top:18px;margin-bottom:6px">③ v5 → v6 국힘 변화 — 권력 시그널 반응</h3>
+            <div class="bar"><span class="label">v5·gpt</span><div class="track"><div class="fill" style="width:6%;background:var(--party-kuk)"></div></div><span class="num">6%</span></div>
+            <div class="bar"><span class="label">v6·gpt</span><div class="track"><div class="fill" style="width:29%;background:var(--party-kuk)"></div></div><span class="num">29%</span></div>
+            <div class="bar"><span class="label">v5·haiku</span><div class="track"><div class="fill" style="width:8%;background:var(--party-kuk);opacity:.55"></div></div><span class="num">8%</span></div>
+            <div class="bar"><span class="label">v6·haiku</span><div class="track"><div class="fill" style="width:15%;background:var(--party-kuk);opacity:.55"></div></div><span class="num">15%</span></div>
+            <p class="meta" style="margin-top:6px">gpt: +23%p · haiku: +7%p — 같은 가상 시나리오에 모델별로 반응 강도가 다름</p>
+          </div>
+        </div>
+
+        <blockquote class="callout" style="margin-top:14px">
+          모델별로 같은 컨텍스트에 다르게 반응 — Haiku는 더 보수적·기권 우세,
+          GPT는 권력 시그널에 더 민감. <b>단일 모델 결과 해석은 신중해야</b>.
+        </blockquote>
+      </section>
+
+      <!-- ───── 2부 시작 ───── -->
+      <section class="center" data-topic="2부. 일관성 분석" data-title="2부 — 일관성 · 이동 패턴 분석">
+        <h1>2부<br/><span style="color:var(--accent);font-size:0.55em">컨텍스트 변화에 대한 응답 일관성 · 이동 패턴 분석</span></h1>
+        <p class="meta" style="margin-top:1.4em">
+          v2 → v6 다섯 단계에 걸쳐 같은 100명의 페르소나가<br/>
+          어떻게 이동했고, 지침에 얼마나 충실히 반응했는가
+        </p>
+      </section>
+
+      <!-- 2부 1. 동기 -->
+      <section data-topic="2부. 일관성 분석" data-title="왜 이 분석이 필요한가">
+        <h2>왜 이 분석이 필요한가</h2>
+        <ul>
+          <li>1부에서 본 것: <span class="accent">버전별 분포는 흔들리지만, 그건 100명 전체의 평균치</span></li>
+          <li>실제 의사결정은 <span class="accent">개별 페르소나 단위</span>에서 일어남 — 누가 끝까지 같은 정당을 지지했나, 누가 흔들렸나</li>
+          <li>지침을 바꿨다고 해서 LLM이 그 지침을 충실히 따랐는가? — <span class="accent">투표 결과만 보고는 알 수 없다</span></li>
+          <li>reason 텍스트를 페르소나 단위로 들여다봐야 — 정량과 정성을 결합한 평가 필요</li>
+        </ul>
+        <blockquote class="callout">
+          핵심 질문<br/>
+          ① 페르소나는 컨텍스트 변화에 일관되게 반응했는가?<br/>
+          ② 어느 단계에서 가장 많이 흔들렸는가?<br/>
+          ③ LLM이 지침의 의도를 reason에 정확히 반영했는가?
+        </blockquote>
+      </section>
+
+      <!-- 2부 2. 3 layer 설계 -->
+      <section data-topic="2부. 일관성 분석" data-title="분석 설계 — 3 layer">
+        <h2>분석 설계 — 3 layer</h2>
+        <div class="grid-3">
+          <div>
+            <h3>Layer 1<br/><span style="font-size:0.7em;color:var(--muted)">페르소나 단위 일관성</span></h3>
+            <ul style="font-size:0.85em">
+              <li>5단계 동안 정당 변경 횟수 (0~4)</li>
+              <li>이동 경로 패턴</li>
+              <li>가장 큰 점프 시점</li>
+              <li>분류: <span class="accent">stable / drift / swing</span></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Layer 2<br/><span style="font-size:0.7em;color:var(--muted)">지침 충실도 (fidelity)</span></h3>
+            <p style="font-size:0.85em;color:var(--muted);margin-bottom:8px">각 단계 변화가 reason에 얼마나 반영됐나 — 1~5 점수</p>
+            <ul style="font-size:0.82em">
+              <li>v2→v3: 인구통계 라벨링 감소</li>
+              <li>v3→v4: 정치 이해관계 인용</li>
+              <li>v4→v5: 정당 정책 매칭</li>
+              <li>v5→v6: 권력 시그널 인지</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Layer 3<br/><span style="font-size:0.7em;color:var(--muted)">종합 — 정량 → 사례</span></h3>
+            <ul style="font-size:0.85em">
+              <li>vote 이동과 reason 변화의 정합성</li>
+              <li>전체 분포로 패턴 정량화</li>
+              <li>대표 사례 narrative로 구체화</li>
+              <li>모델 차이: gpt vs haiku</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2부 3. 방법론 -->
+      <section data-topic="2부. 일관성 분석" data-title="방법 — 서브에이전트 병렬 평가">
+        <h2>방법 — 서브에이전트 병렬 평가</h2>
+        <div class="grid-2">
+          <div>
+            <h3>오케스트레이션</h3>
+            <ul style="font-size:0.9em">
+              <li>같은 100명 페르소나 → <b>10명씩 청크 10개</b> 분할</li>
+              <li>각 청크에 페르소나당 v2~v6 응답 + 페르소나 카드 동봉</li>
+              <li>Claude 서브에이전트 10개 <b>병렬 dispatch</b></li>
+              <li>채점 결과를 <code>backend/eval/</code> 아래 텍스트로 저장</li>
+              <li>오케스트레이터가 10개 결과 파싱·집계 → 마크다운 + JSON</li>
+              <li><span class="accent">gpt-5.4-mini · claude-haiku-4-5 두 세트 각각</span></li>
+            </ul>
+          </div>
+          <div>
+            <h3>페르소나당 산출 (1~5 척도)</h3>
+<pre><code>persona_uuid: ...
+votes: [v2, v3, v4, v5, v6]
+n_changes: 0~4
+trajectory: stable | drift | swing
+biggest_jump: v3→v4 등
+
+fidelity:
+  v2_v3_demographic_drop:  1~5
+  v3_v4_pi_citation:       1~5
+  v4_v5_policy_match:      1~5
+  v5_v6_power_signal:      1~5
+
+reason_quality_trend: improving|stable|shallow
+narrative: "한 줄 요약"</code></pre>
+          </div>
+        </div>
+        <p class="meta" style="margin-top:6px">
+          분류 기준: <b>stable</b> (변화 0회) · <b>drift</b> (1~2회 점진) · <b>swing</b> (3~4회 잦은 변화)
+        </p>
+      </section>
+
+      <!-- 2부 4. 결과 — gpt -->
+      <section data-topic="2부. 일관성 분석" data-title="결과 (gpt-5.4-mini)">
+        <h2>결과 — gpt-5.4-mini <span style="font-size:0.5em;color:var(--muted);font-weight:400">100명 · 5단계</span></h2>
+        <div class="grid-2">
+          <div>
+            <h3>trajectory · biggest jump</h3>
+            <div class="bar"><span class="label">stable</span><div class="track"><div class="fill" style="width:33%;background:var(--party-min)"></div></div><span class="num">33명</span></div>
+            <div class="bar"><span class="label">drift</span><div class="track"><div class="fill" style="width:56%;background:var(--party-gae)"></div></div><span class="num">56명</span></div>
+            <div class="bar"><span class="label">swing</span><div class="track"><div class="fill" style="width:11%;background:var(--party-kuk)"></div></div><span class="num">11명</span></div>
+            <div style="height:10px"></div>
+            <div class="bar"><span class="label">v3→v4</span><div class="track"><div class="fill" style="width:100%;background:var(--accent)"></div></div><span class="num">23명</span></div>
+            <div class="bar"><span class="label">v5→v6</span><div class="track"><div class="fill" style="width:43%;background:var(--accent)"></div></div><span class="num">10명</span></div>
+            <div class="bar"><span class="label">v2→v3</span><div class="track"><div class="fill" style="width:39%;background:var(--accent)"></div></div><span class="num">9명</span></div>
+            <div class="bar"><span class="label">v4→v5</span><div class="track"><div class="fill" style="width:35%;background:var(--accent)"></div></div><span class="num">8명</span></div>
+            <p class="meta" style="margin-top:4px">변곡점: <span class="accent">v3→v4 (1인칭 정치 이해관계 블록 투입)</span> 압도적</p>
+          </div>
+          <div>
+            <h3>단계별 평균 지침 충실도 fidelity (1~5)</h3>
+            <div class="bar"><span class="label">v2→v3 인구통계</span><div class="track"><div class="fill" style="width:61%;background:var(--accent)"></div></div><span class="num">3.06</span></div>
+            <div class="bar"><span class="label">v3→v4 정치 이해관계 인용</span><div class="track"><div class="fill" style="width:99%;background:var(--accent)"></div></div><span class="num"><b>4.93</b></span></div>
+            <div class="bar"><span class="label">v4→v5 정책 매칭</span><div class="track"><div class="fill" style="width:92%;background:var(--accent)"></div></div><span class="num"><b>4.61</b></span></div>
+            <div class="bar"><span class="label">v5→v6 권력 시그널</span><div class="track"><div class="fill" style="width:29%;background:var(--accent-2)"></div></div><span class="num"><b>1.44</b></span></div>
+            <blockquote class="callout">
+              <b>핵심 비대칭</b> — 정치 이해관계 인용·정당 정책 매칭은 거의 만점, 권력 시그널은 1.44 실패.
+              "여당이 누구인지" 메타 사실은 LLM 사전 학습 분포가 너무 강해 뒤집히지 않음.
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2부 5. 결과 — haiku -->
+      <section data-topic="2부. 일관성 분석" data-title="결과 (claude-haiku-4-5)">
+        <h2>결과 — claude-haiku-4-5 <span style="font-size:0.5em;color:var(--muted);font-weight:400">98명 · v4~v6 (3단계)</span></h2>
+        <div class="grid-2">
+          <div>
+            <h3>trajectory · biggest jump</h3>
+            <div class="bar"><span class="label">stable</span><div class="track"><div class="fill" style="width:62%;background:var(--party-min);opacity:.65"></div></div><span class="num">61명</span></div>
+            <div class="bar"><span class="label">drift</span><div class="track"><div class="fill" style="width:24%;background:var(--party-gae);opacity:.65"></div></div><span class="num">24명</span></div>
+            <div class="bar"><span class="label">swing</span><div class="track"><div class="fill" style="width:13%;background:var(--party-kuk);opacity:.65"></div></div><span class="num">13명</span></div>
+            <div style="height:10px"></div>
+            <div class="bar"><span class="label">v4→v5</span><div class="track"><div class="fill" style="width:100%;background:var(--accent);opacity:.7"></div></div><span class="num">32명</span></div>
+            <div class="bar"><span class="label">v5→v6</span><div class="track"><div class="fill" style="width:31%;background:var(--accent);opacity:.7"></div></div><span class="num">10명</span></div>
+            <p class="meta" style="margin-top:4px">v4→v5 (정책 매칭+무당층 억제)가 결정적. 무당층 41% → 12% 급감</p>
+          </div>
+          <div>
+            <h3>지침 충실도 fidelity · GPT 대비</h3>
+            <div class="bar"><span class="label">v4→v5 정책</span><div class="track"><div class="fill" style="width:80%;background:var(--accent);opacity:.7"></div></div><span class="num"><b>4.01</b></span></div>
+            <div class="bar"><span class="label">v5→v6 권력</span><div class="track"><div class="fill" style="width:39%;background:var(--accent-2);opacity:.7"></div></div><span class="num"><b>1.94</b></span></div>
+            <table class="dist" style="font-size:0.82em;margin-top:10px">
+              <thead><tr><th></th><th class="num">gpt</th><th class="num">haiku</th></tr></thead>
+              <tbody>
+                <tr><td>v4→v5 정책</td><td class="num">4.61</td><td class="num">4.01</td></tr>
+                <tr><td>v5→v6 권력</td><td class="num">1.44</td><td class="num">1.94</td></tr>
+              </tbody>
+            </table>
+            <blockquote class="callout">
+              두 모델 모두 같은 비대칭 — 정책 매칭 강력 / 권력 시그널 실패. 모델 차이보다 패턴의 재현이 핵심.
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2부 6a. 대표 사례 3건 -->
+      <section data-topic="2부. 일관성 분석" data-title="대표 사례 3건">
+        <h2>대표 사례 — 정량을 narrative로</h2>
+        <div class="grid-3">
+          <div>
+            <h3>① 가장 stable</h3>
+            <p class="muted" style="font-size:0.78em">전북 군산 27F 워킹맘 (소방시설 기술자)</p>
+            <blockquote class="callout" style="font-size:0.78em">
+              <b>민주 / 민주 / 민주 / 민주 / 민주</b><br/>
+              v4부터 "육아휴직 250만·사후지급금 폐지·대체인력 140만" 정치 이해관계 디테일을 직접 인용. 직업·돌봄·여성·청년 다중 정렬로 v6 권력 변화에도 흔들리지 않음.
+            </blockquote>
+          </div>
+          <div>
+            <h3>② 가장 swing</h3>
+            <p class="muted" style="font-size:0.78em">세종 1인 가구 병무행정 · n_changes 4</p>
+            <blockquote class="callout" style="font-size:0.78em">
+              <b>국힘 / 민주 / 개혁 / 민주 / 국힘</b><br/>
+              v4에서 "키오스크 얼굴인식" → 개혁신당. v6에서 "법치·연금건전성·원전·안정" → 국힘 회귀. 권력 fidelity <b>4점</b>.
+            </blockquote>
+          </div>
+          <div>
+            <h3>③ v6 권력 시그널 정타</h3>
+            <p class="muted" style="font-size:0.78em">의정부 보건소 청소원 (부부 가구)</p>
+            <blockquote class="callout" style="font-size:0.78em">
+              <b>민주 / 민주 / 민주 / 민주 / 국힘</b><br/>
+              v5까지 "기초연금 247만·공중보건의" 정치 이해관계 인용 → 민주. v6에서 "연금 재정 건전성"을 국힘 카드와 매칭하며 명시 이탈. fidelity <b>4점</b>.
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2부 6b. 종합 패턴 -->
+      <section data-topic="2부. 일관성 분석" data-title="종합 패턴 4가지">
+        <h2>종합 패턴 — narrative 에서 본 4가지</h2>
+        <div class="grid-2">
+          <div>
+            <blockquote class="callout">
+              <b>(가) 인지와 결정의 분리</b><br/>
+              v6에서 vote 가 변경된 페르소나도 reason에 "장재현·여당" 명시 거의 없음. <b>대부분의 변경은 정책 카드 재해석에 의한 자생적 회귀</b>이며 권력 인지가 결정의 원인이 아님.
+            </blockquote>
+            <blockquote class="callout">
+              <b>(나) 정당 귀속의 자의성</b><br/>
+              부산 76세는 "간병비 30%"를 v5 민주 / v6 국힘으로 귀속. 19F 대구는 "청년일자리도약장려금"을 v5 민주 / v6 국힘에 라벨링. <b>LLM 의 사후 정당화</b>.
+            </blockquote>
+          </div>
+          <div>
+            <blockquote class="callout">
+              <b>(다) 정치 이해관계 인용이 가장 강력한 레버</b><br/>
+              v3→v4 변곡점 23명. 1인칭 정치 이해관계 블록은 reason에 거의 100% 직접 인용되며 vote 결정에 가장 결정적. 다중 정체성 정렬이 강한 페르소나는 이후 robust.
+            </blockquote>
+            <blockquote class="callout">
+              <b>(라) hallucination 사례</b><br/>
+              한 페르소나 reason 의 "돌봄 25년" 이 정치 이해관계 블록에선 "7년". LLM 이 페르소나 텍스트를 부정확하게 변형 — <b>fidelity 평가에 사실성 검증 필요</b>.
+            </blockquote>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2부 7. 종합 의의 -->
+      <section data-topic="2부. 일관성 분석" data-title="2부 종합 의의">
+        <h2>2부 종합 — 의의와 함의</h2>
+        <ol style="font-size:0.92em;line-height:1.5">
+          <li><b>지침 충실도의 비대칭</b> — reason 본문에 등장하라는 지침(정치 이해관계 인용·정당 정책 매칭)엔 충실, "여당이 누구인가" 메타 사실은 사전 학습 분포에 막힘.</li>
+          <li><b>인지 ≠ 결정</b> — vote 분포가 변해도 의도한 컨텍스트 인지 때문이라 단정 못 함. v6은 결과로 "작동" 보이나 reason에선 자생적 회귀.</li>
+          <li><b>정책-정당 귀속의 자의성</b> — 같은 정책을 같은 페르소나가 컨텍스트마다 다른 정당에 귀속. LLM 의 사후 정당화 능력.</li>
+          <li><b>다중 정체성 정렬의 견고함</b> — 정치 이해관계가 풍부한 페르소나는 robust. <b>v3→v4 정치 이해관계 투입이 가장 강력한 레버</b>.</li>
+          <li><b>방법론 권고</b> — 단일 vote 결과로 평가 금지. <b>vote 변화 + reason fidelity + 사례 narrative</b> 삼각 검증.</li>
+        </ol>
+        <p class="meta" style="margin-top:8px">전체 데이터: <code>doc/v2_v6_consistency_analysis_{gpt,haiku}.json</code> · <code>doc/v2_v6_narratives_{gpt,haiku}.json</code></p>
+      </section>
+
+      <!-- 13. 선행연구 -->
+      <section data-topic="7. 학술 위치" data-title="선행연구와의 위치">
+        <h2>선행연구 — 유럽의회 시뮬레이션</h2>
+        <p>
+          <b>"Persona-driven Simulation of Voting Behavior in the European Parliament with Large Language Models"</b> (2025)
+        </p>
+        <ul>
+          <li>유럽의회 의원 페르소나로 47개 안건 투표를 LLM이 시뮬레이션, 실제 결과와 비교</li>
+          <li>가장 강력한 예측 지표: <span class="accent">소속 국가 정당</span></li>
+          <li>해석: LLM은 "사람이 자기 집단 기조대로 투표한다"는 행태를 학습·내재</li>
+        </ul>
+        <blockquote class="callout">
+          본 실험에서 v2 → v3 만으로 결과가 크게 변한 것과 일치하는 관찰.<br/>
+          "이 사람은 대구에 산다", "광주에 산다" 한 줄이 페르소나 풍부화를 압도할 수 있음.<br/>
+          그리고 그것이 꼭 LLM의 잘못된 작동방식이라고 보기도 어렵다 — <b>실제 사람의 의사결정도 그렇기 때문</b>.
+        </blockquote>
+      </section>
+
+      <!-- 14. 방법론적 결론 -->
+      <section data-topic="8. 결론" data-title="방법론적 결론">
+        <h2>방법론적 결론 — <span style="color:var(--accent-2)">이 방법으로 투표 추정은 부적절</span></h2>
+        <p class="muted">1부와 2부의 데이터가 같은 방향을 가리킨다 — 페르소나-LLM 조합으로 정당 지지율을 측정하려는 시도는 현 시점 신뢰할 수 없다.</p>
+        <ol style="font-size:0.92em;line-height:1.5">
+          <li><b>입력 민감도가 측정 도구 수준이 아님</b> — 컨텍스트 한 두 줄(지역 단서 / 정당 정책 카드 / 권력 라벨)에 분포가 30~50%p씩 흔들림. 여론조사를 대체할 안정성이 없다.</li>
+          <li><b>모델은 vote 결과에 reason을 사후 합성</b> — 같은 페르소나가 같은 정책("간병비 30%·청년일자리도약장려금")을 컨텍스트에 따라 다른 정당에 귀속시킴. 그렇다면 그 vote는 무엇의 측정인가?</li>
+          <li><b>명시한 컨텍스트 사실을 인식조차 못 함</b> — v6에서 "장재현 대통령·국힘 여당 160석" 이라고 명시했는데도 reason 본문에는 거의 등장하지 않음 (충실도 1.44 / 1.94). LLM은 사전 학습된 "민주=여당" 분포를 컨텍스트로 덮지 못함. <span class="muted">(여당이라고 그쪽에 투표해야 한다는 뜻이 아니라, 페르소나가 바뀐 정치 환경 자체를 인지하지 못한다는 뜻.)</span></li>
+          <li><b>Hallucination</b> — 페르소나 카드 "돌봄 7년"을 reason 에 "25년"으로 인용. 정량 fidelity 점수도 사실성 검증을 거치지 않으면 신뢰할 수 없음.</li>
+        </ol>
+        <blockquote class="callout" style="margin-top:14px">
+          <b>그렇다면 무엇에 쓸 수 있는가</b> — 결과가 아니라 <b>컨텍스트 생성 도구</b>로. 다양한 페르소나의 1인칭 reason 텍스트를 모아 "이런 입장도 있겠구나" 라는 정성적 인사이트를 얻는 활용. <b>"가능한 여론 지형도"의 정량적 측정이 아니라 정성적 스케치</b>.
+        </blockquote>
+      </section>
+
+      <!-- 15. 다음 스텝 -->
+      <section data-topic="9. 다음" data-title="다음 스텝 — Open Questions">
+        <h2>다음 스텝 / Open Questions</h2>
+        <ul>
+          <li><b>시계열 검증</b> — 2026 1월/2월/3월/4월 각각의 시사 컨텍스트를 주고 투표, 실제 여론조사 추이와 일치하는지</li>
+          <li><b>Agent-based 확장</b> — 각 페르소나가 자신의 과거 투표 컨텍스트를 시계열로 보유, 또래 네트워크 상호작용 모델링</li>
+          <li><b>다중 모델 합의 코딩</b> — 사회과학 의견 분류 표준처럼 N개 모델의 서술/판단이 일치할 때만 채택</li>
+          <li><b>풍부한 후보 컨텍스트로 정책 토론</b> — 여론 시뮬레이션보다, 두 후보의 행적/사건사고를 컨텍스트로 주고 턴-바이-턴 정책 토론을 시키는 게 더 흥미로울 수도</li>
+        </ul>
+      </section>
+
+      <!-- 16. 데모 -->
+      <section data-topic="10. 데모" data-title="라이브 데모 / Q&A">
+        <h2>라이브 데모</h2>
+        <div class="grid-2">
+          <div>
+            <h3>대시보드 — 모델·버전 비교</h3>
+            <p class="meta"><a href="../dashboard.html" target="_blank">dashboard.html ↗</a></p>
+            <iframe class="embed" src="../dashboard.html" loading="lazy"></iframe>
+          </div>
+          <div>
+            <h3>페르소나별 응답 비교 (v2~v6)</h3>
+            <p class="meta"><a href="../compare.html" target="_blank">compare.html ↗</a></p>
+            <iframe class="embed" src="../compare.html" loading="lazy"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- 17. 끝 -->
+      <section class="center" data-topic="-" data-title="감사합니다">
+        <h1>감사합니다</h1>
+        <p class="meta" style="margin-top:2em">
+          <a href="https://github.com/vuski/persona-million" target="_blank">github.com/vuski/persona-million</a><br/>
+          <a href="https://vuski.github.io/persona-million" target="_blank">vuski.github.io/persona-million</a>
+        </p>
+      </section>
+
+    </div>
+  </div>
+
+  <script type="module">
+    import Reveal from "https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.esm.js";
+
+    const deck = new Reveal({
+      hash: true,
+      slideNumber: "c/t",
+      controls: true,
+      progress: true,
+      view: "scroll",
+      scrollLayout: "compact",
+      scrollSnap: false,                 // snap 끄면 긴 슬라이드도 자연스럽게 스크롤 가능
+      scrollProgress: true,
+      transition: "slide",
+      width: 1280,
+      height: 820,                       // 세로 여유 더
+      margin: 0.04,
+      minScale: 0.3,                     // 더 작게도 축소 허용
+      maxScale: 1.4,
+    });
+    await deck.initialize();
+
+    // 스크롤 모드 여부에 따라 sticky 헤더 표시
+    function syncMode() {
+      if (deck.isScrollView()) document.body.classList.add("scroll-mode");
+      else document.body.classList.remove("scroll-mode");
+    }
+    syncMode();
+    deck.on("scrollactivate", syncMode);
+    deck.on("scrolldeactivate", syncMode);
+
+    // 현재 슬라이드 → sticky 헤더 갱신
+    const stickyOrd = document.getElementById("sticky-ord");
+    const stickyTopic = document.getElementById("sticky-topic");
+    const stickyTitle = document.getElementById("sticky-title");
+    const allSections = Array.from(document.querySelectorAll(".reveal .slides > section"));
+    const total = allSections.length;
+
+    function updateSticky(section) {
+      if (!section) return;
+      const idx = allSections.indexOf(section) + 1;
+      stickyOrd.textContent = `${idx} / ${total}`;
+      stickyTopic.textContent = section.dataset.topic || "";
+      stickyTitle.textContent = section.dataset.title || "";
+    }
+    deck.on("slidechanged", e => updateSticky(e.currentSlide));
+    deck.on("ready", e => updateSticky(e.currentSlide));
+
+    // 스크롤 모드: viewport 가운데에 가장 가까운 section 을 active 로 인식
+    const scrollContainer = document.querySelector(".reveal");
+    function pickByScroll() {
+      if (!deck.isScrollView()) return;
+      const mid = window.innerHeight / 2;
+      let best = null, bestDist = Infinity;
+      for (const s of allSections) {
+        const r = s.getBoundingClientRect();
+        const center = r.top + r.height / 2;
+        const dist = Math.abs(center - mid);
+        if (dist < bestDist) { bestDist = dist; best = s; }
+      }
+      if (best) updateSticky(best);
+    }
+    window.addEventListener("scroll", pickByScroll, { passive: true });
+    setTimeout(pickByScroll, 300);
+  </script>
+</body>
+</html>

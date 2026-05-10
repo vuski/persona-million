@@ -1,0 +1,162 @@
+[
+  {
+    "persona_uuid": "3f9760b8c4154c2ea5343a14abb1a99e",
+    "name_hint": "양용범 45남 김해 용접공",
+    "votes": {"v2": "국민의힘", "v3": "국민의힘", "v4": "더불어민주당", "v5": "더불어민주당", "v6": "국민의힘"},
+    "n_changes": 2,
+    "trajectory": "swing",
+    "biggest_jump": "v3->v4",
+    "fidelity": {
+      "v2_v3_demographic_drop": 3,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "v4에서 보육수당 비과세·만 4세 무상교육 등 PI 디테일을 직접 인용하며 민주당으로 스윙했으나, v5의 정당 카드 매칭에도 머물다가 v6에서는 '자재값·공단·일감' 보수 회귀 논리로 국힘으로 돌아옴. 권력 뒤집기 인지는 reason 어디에도 없음."
+  },
+  {
+    "persona_uuid": "3fa1aaeee1c0449bba6799db9bc14d9d",
+    "name_hint": "신정자 68여 부산진구 무직",
+    "votes": {"v2": "국민의힘", "v3": "더불어민주당", "v4": "더불어민주당", "v5": "더불어민주당", "v6": "더불어민주당"},
+    "n_changes": 1,
+    "trajectory": "drift",
+    "biggest_jump": "v2->v3",
+    "fidelity": {
+      "v2_v3_demographic_drop": 2,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "v3에서 의료대기·돌봄 우선순위로 민주당 정착, v4 이후로는 '작약 자리 잡초', '보건소 만성질환 통합관리센터', '짜장면값' 등 PI를 그대로 인용하며 정책 카드까지 명시적으로 비교. 다만 v6 reason에 권력 시그널 인지는 없음."
+  },
+  {
+    "persona_uuid": "3fe76c236f894e1f9d6944c8815d5011",
+    "name_hint": "권민영 53여 수지 가사도우미",
+    "votes": {"v2": "더불어민주당", "v3": "국민의힘", "v4": "더불어민주당", "v5": "더불어민주당", "v6": "더불어민주당"},
+    "n_changes": 2,
+    "trajectory": "swing",
+    "biggest_jump": "v3->v4",
+    "fidelity": {
+      "v2_v3_demographic_drop": 2,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "v3에서 시장 숨통·고정거래처 논리로 잠시 국힘으로 빠졌다가 v4에서 '전세 매물 30% 감소', '가사 도우미는 최저임금 적용 제외' 등 PI 핵심 사실을 인용해 민주당으로 복귀. v5·v6에서는 공공주택·플랫폼 노동권 정책 카드를 정확히 매칭. v6 권력 뒤집기 인지 없음."
+  },
+  {
+    "persona_uuid": "4c0d2c8e4ae14838ab485dd37fbc6f4d",
+    "name_hint": "장말순 79여 금산 청소원",
+    "votes": {"v2": "국민의힘", "v3": "더불어민주당", "v4": "더불어민주당", "v5": "더불어민주당", "v6": "더불어민주당"},
+    "n_changes": 1,
+    "trajectory": "drift",
+    "biggest_jump": "v2->v3",
+    "fidelity": {
+      "v2_v3_demographic_drop": 2,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "v3에서 '여당인 더불어민주당' 표현이 등장(현실 기준 권력 인식), v4에서 '공보의 미배치 82%', '기초연금 40만 원', '읍면 보건지소' 등 PI를 농촌 의료 절박성으로 직접 인용. v5·v6에서 정책 카드 매칭 정확. 단 v6에 권력 뒤집기(국힘 여당 160석/장재현) 인지 흔적 없음."
+  },
+  {
+    "persona_uuid": "4cda9df54b59414d90393002afed54c1",
+    "name_hint": "박진실 40여 강릉 혼례종사원",
+    "votes": {"v2": "개혁신당", "v3": "더불어민주당", "v4": "무당층/기권", "v5": "더불어민주당", "v6": "더불어민주당"},
+    "n_changes": 3,
+    "trajectory": "swing",
+    "biggest_jump": "v3->v4",
+    "fidelity": {
+      "v2_v3_demographic_drop": 3,
+      "v3_v4_pi_citation": 4,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "v4에서 '바우처가 생겨도 저는 직원이라 해당 안 됨', '월세·단독주택 보일러 기름값' 등 PI를 살려 기권으로 빠졌다가, v5·v6에서 민주당의 '사람 중심 경제·소상공인·자영업 민생 지원' 카드와 매칭하며 다시 민주당으로 수렴. 4번 변화에서 가장 흔들린 페르소나. v6에서 권력 시그널 인지 없음."
+  },
+  {
+    "persona_uuid": "4cfaed7c351d47f189f2a2e3944f4c83",
+    "name_hint": "고성배 39남 금천 보안전문가",
+    "votes": {"v2": "국민의힘", "v3": "국민의힘", "v4": "개혁신당", "v5": "더불어민주당", "v6": "개혁신당"},
+    "n_changes": 3,
+    "trajectory": "swing",
+    "biggest_jump": "v4->v5",
+    "fidelity": {
+      "v2_v3_demographic_drop": 3,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "v4에서 'PQC 전환·양자내성암호', '다크패턴·AI 채용솔루션 사전조사' 등 기술 PI를 인용해 개혁신당으로 점프, v5에서 정책 카드 영향으로 민주당까지 갔다가 v6에서 '양당 기득권보다 행정 효율·과학기술 육성'이라는 개혁신당 카드 논리로 회귀. 가장 카드에 민감한 페르소나지만 권력 시그널 인지는 없음."
+  },
+  {
+    "persona_uuid": "50f60b9e1223438b84ddeb5a79ba595d",
+    "name_hint": "이두희 63여 청주 요양보호사",
+    "votes": {"v2": "더불어민주당", "v3": "더불어민주당", "v4": "더불어민주당", "v5": "더불어민주당", "v6": "더불어민주당"},
+    "n_changes": 0,
+    "trajectory": "stable",
+    "biggest_jump": "none",
+    "fidelity": {
+      "v2_v3_demographic_drop": 2,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "투표는 5회 모두 민주당으로 고정. v4에서 '욕창 관리·투약 시간', '1년 근속 장려금·5년 선임 수당', '한부모 지원 중위소득 65%', '자격증 문턱' 등 PI를 정밀 인용, v5·v6에서 특수고용·플랫폼 노동권·기본소득 시범 등 카드를 매칭. 권력 시그널 인지는 없음."
+  },
+  {
+    "persona_uuid": "51b7b656638747bd86a0a10644b73724",
+    "name_hint": "김성희 56여 수원 제도사",
+    "votes": {"v2": "더불어민주당", "v3": "국민의힘", "v4": "더불어민주당", "v5": "더불어민주당", "v6": "국민의힘"},
+    "n_changes": 3,
+    "trajectory": "swing",
+    "biggest_jump": "v5->v6",
+    "fidelity": {
+      "v2_v3_demographic_drop": 2,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "v3 국힘→v4 민주→v6 국힘으로 두 번 점프. v4에서 '4월 17일 다주택자 임대사업자 대출 만기연장', '수원 영통 3.45%', '내란 재판·단전 지시' 등 PI 사실 인용 매우 정확. v6에서 '건설 취업자 감소·일감·재개발/재건축' 논리로 국힘 회귀하지만 권력 뒤집기 인지는 없음."
+  },
+  {
+    "persona_uuid": "56360fcf9c6842fd9510177234b149fd",
+    "name_hint": "방창영 57남 고양 금형원",
+    "votes": {"v2": "국민의힘", "v3": "국민의힘", "v4": "국민의힘", "v5": "국민의힘", "v6": "국민의힘"},
+    "n_changes": 0,
+    "trajectory": "stable",
+    "biggest_jump": "none",
+    "fidelity": {
+      "v2_v3_demographic_drop": 2,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "5회 전부 국힘 고정. v4에서 '나프타 값 배럴당 천백 달러', '고양대곡 신규 택지', '정년 65세 본회의', '국민연금 13%' 등 PI 디테일 인용 강함. v5·v6에서 재건축·택지 공급, 원전, 연금 재정건전화 카드를 정확히 매칭. 권력 시그널 인지 없음."
+  },
+  {
+    "persona_uuid": "58559d69c15541f5b642aee14bba9a76",
+    "name_hint": "최영숙 71여 대전 유성 무직",
+    "votes": {"v2": "더불어민주당", "v3": "더불어민주당", "v4": "더불어민주당", "v5": "더불어민주당", "v6": "더불어민주당"},
+    "n_changes": 0,
+    "trajectory": "stable",
+    "biggest_jump": "none",
+    "fidelity": {
+      "v2_v3_demographic_drop": 2,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "5회 모두 민주당 고정. v4에서 '기초연금 247만 원·40만 원', '시니어 디지털 바우처', '치매안심재산관리', '유성천 수채화' 등 PI를 직접 인용. v5·v6에서 기초소득·복지 확대 vs 연금 재정건전성, 조국혁신당·진보당 카드까지 비교. 권력 시그널 인지는 없음."
+  }
+]

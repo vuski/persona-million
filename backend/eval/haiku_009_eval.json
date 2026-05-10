@@ -1,0 +1,188 @@
+{
+  "meta": {
+    "batch": "haiku_009",
+    "model": "claude-haiku-4-5",
+    "n_personas": 10,
+    "versions": ["v4", "v5", "v6"],
+    "version_changes": {
+      "v4_to_v5": "정당 정책 카드 + 매칭 강제 + 무당층 억제",
+      "v5_to_v6": "권력 라벨 뒤집기(장재현/국힘 여당 160)"
+    },
+    "aggregate": {
+      "vote_counts": {
+        "v4": {"더불어민주당": 7, "국민의힘": 2, "무당층/기권": 2},
+        "v5": {"더불어민주당": 7, "국민의힘": 2, "무당층/기권": 2},
+        "v6": {"더불어민주당": 8, "국민의힘": 1, "무당층/기권": 2}
+      },
+      "n_changed_v4_v5": 0,
+      "n_changed_v5_v6": 1,
+      "n_changed_v4_v6": 1,
+      "stability_rate": 0.9,
+      "v4_v5_policy_match_avg": 3.6,
+      "v5_v6_power_signal_avg": 2.7,
+      "note": "v4→v5는 vote 자체는 전부 동일하나 reason 텍스트 내 '민주당/국민의힘 정책 명시 인용' 빈도가 크게 늘어남(이재명 정부, 소득 하위 70% 민생지원금, 특수고용·플랫폼 노동권, 기업 친화, 연금 재정 건전화 등). v5→v6는 권력 라벨 뒤집기(국힘=여당) 적용 후에도 9/10이 vote 동일하며, 김수길(f31c0881)만 국힘→민주로 변동 — 권력 라벨 신호가 일부 친여 회피 보수층에서만 결정 변경에 도달함."
+    }
+  },
+  "personas": [
+    {
+      "persona_uuid": "d9a569b7536e4ad2ab72c63be3ebdef5",
+      "name_hint": "남미경 60F 충북 청주",
+      "votes": ["더불어민주당", "더불어민주당", "더불어민주당"],
+      "n_changes": 0,
+      "trajectory": "민주 일관(v4→v5→v6 stable)",
+      "biggest_jump": null,
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 4,
+        "v5_v6_power_signal": 2
+      },
+      "reason_quality_trend": "v4는 정책 + 일상 균형, v5에서 '이재명 정부/소득 하위 70%/민주당 기본소득 시범/국힘 연금 재정 건전화 vs 민주당 복지 확대' 등 정당 카드 인용이 명시적으로 등장(매칭 강제 효과 뚜렷). v6는 '소득 하위 70% 민생 지원금/적극 재정/기업 친화 vs 민생 중심' 같은 카드 일부 유지하면서 PI(간장 7.9%, 된장 6.4%, 765억) 인용도 풍성. 단 v6에서 권력 라벨 뒤집기 신호(국힘=여당)는 거의 흡수되지 않음 — 여전히 '민주당의 적극 재정' 프레임이 일관.",
+      "narrative": "노년 여성 + 가계부 + 인프라(상수도) 결합으로 민주 친화가 매우 강한 케이스. 권력 라벨 뒤집기에도 불구하고 v6에서 흔들림 없음. v5의 policy_match가 가장 명확히 드러난 모범 케이스."
+    },
+    {
+      "persona_uuid": "da18fe126702436aa46b102ac8ea45d9",
+      "name_hint": "신성일 43M 서울 강서 시설경비원",
+      "votes": ["더불어민주당", "더불어민주당", "더불어민주당"],
+      "n_changes": 0,
+      "trajectory": "민주 일관",
+      "biggest_jump": null,
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 4,
+        "v5_v6_power_signal": 2
+      },
+      "reason_quality_trend": "v4는 부동산 규제(다주택자 만기연장)와 노동 안정 위주의 일반론. v5에서 '민주당의 공공주택 공급 확대/세금으로 집값 잡지 않겠다/특수고용·플랫폼 노동권 강화' 등 정책 카드 명시 인용(policy_match 향상). v6는 '국힘 31만 가구 도심 공급 vs 민간 용적률 완화 → 무주택자 불리' 비교 프레임이 추가되며 양당 비교 정교화. 권력 신호(국힘=여당)는 vote에 영향 없음.",
+      "narrative": "전세 + 자격증 + 두 자녀 가장의 전형적 친여 노동자. v6의 '국힘 31만 가구 vs 민주당 공공주택' 비교는 정책 카드가 양방향으로 작동했다는 좋은 증거. 단 권력 라벨은 받아들이지 않음."
+    },
+    {
+      "persona_uuid": "e3045f8a654c4c55b182efe66d8414f9",
+      "name_hint": "최제헌 39M 서울 관악 생산관리",
+      "votes": ["더불어민주당", "더불어민주당", "더불어민주당"],
+      "n_changes": 0,
+      "trajectory": "민주 일관",
+      "biggest_jump": null,
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 4,
+        "v5_v6_power_signal": 2
+      },
+      "reason_quality_trend": "v4는 안전관리(중대재해)/주 4.5일제/부동산 1주택자 균형. v5는 '민주당 공공주택+재건축 합리화/초확장 재정/소득 하위 70% 민생 지원' 카드 인용 + '국힘 규제 완화·기업 친화'와 비교. v6는 '세금으로 집값 잡지 않겠다/중대재해처벌법 강화/특수고용 노동권' 등 카드가 더 풍부, 안전관리 경험과 정책의 결합이 정교. 권력 라벨 신호는 무시.",
+      "narrative": "1주택 중산층 친여의 정석. v6에서 정책 카드 풍부도가 가장 향상된 케이스 중 하나. 권력 라벨에는 둔감."
+    },
+    {
+      "persona_uuid": "e35fb3be4eb74de2a9d5baa947891519",
+      "name_hint": "변희운 36M 경기 양주 사무보조",
+      "votes": ["무당층/기권", "무당층/기권", "무당층/기권"],
+      "n_changes": 0,
+      "trajectory": "무당층 일관",
+      "biggest_jump": null,
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 2,
+        "v5_v6_power_signal": 1
+      },
+      "reason_quality_trend": "PI에 충실하게 '끼인 세대/제조업 청년 지원금 자격 미달/부모 동거 미혼' 정체성을 v4~v6 모두 일관 유지. v5/v6에서도 정당 카드를 거의 언급하지 않으며 '어느 당도 내 삶을 직접 바꾸지 않는다'는 무당층 논리가 그대로. 무당층 억제(v5) 압력에도 PI가 너무 강해 정치 무관심으로 수렴 — 정확한 모델링.",
+      "narrative": "v5의 '무당층 억제' 압력을 PI가 압도해 무당층 유지. 권력 라벨도 의미 없음. 모델이 PI를 가장 충실히 반영한 케이스이며, 강한 정체성 무당층은 어떤 압력으로도 흔들리지 않는다는 좋은 negative case."
+    },
+    {
+      "persona_uuid": "e3a6d7f3c27448709c9b310f10520564",
+      "name_hint": "김희현 33M 부산 해운대 창업준비",
+      "votes": ["더불어민주당", "더불어민주당", "더불어민주당"],
+      "n_changes": 0,
+      "trajectory": "민주 일관",
+      "biggest_jump": null,
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 3,
+        "v5_v6_power_signal": 3
+      },
+      "reason_quality_trend": "v4는 청년 창업 지원 중심. v5는 '특수고용·플랫폼 노동권 강화/최저임금 인상' 카드를 자기 입장에서 양가적으로 인용(소상공인 인건비 부담)하며 정책 매칭이 풍부. v6는 '초확장 예산/소득 하위 70% 민생 지원금/규제 완화 vs 민생 지원' 비교를 명시 — 권력 라벨 뒤집기에도 카드는 일관 인용되나, 33세 창업 준비 청년 입장에서 친여 논리는 유지. 권력 신호 일부 흡수(국힘 매력 언급).",
+      "narrative": "양가적 정책 매칭의 모범. v6에서 '국힘이 더 실질적일 수도 있다'는 인정 후 다시 민주로 회귀 — 권력 신호가 약하게 도달했으나 결정은 바꾸지 못함."
+    },
+    {
+      "persona_uuid": "eb6999ff900840769617035aae7f3492",
+      "name_hint": "임상철 45M 경북 영덕 검침원",
+      "votes": ["국민의힘", "국민의힘", "국민의힘"],
+      "n_changes": 0,
+      "trajectory": "국힘 일관",
+      "biggest_jump": null,
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 3,
+        "v5_v6_power_signal": 4
+      },
+      "reason_quality_trend": "v4는 '골목 사정 아는 사람/지역 토착' PI 충실. v5에서 '이재명 정부의 그린에너지·웰니스 프로젝트가 우리 지역에 일자리 못 준다/한우 도매가 부담'으로 정부 비판 카드를 인용 — policy_match 등장. v6는 정책 카드가 약해지고 다시 PI(군수 후보 3인 경선/북부권 소외론) 중심으로 회귀, 그러나 권력 라벨 뒤집기 후에도 '국민의힘이 지역 현안 적극 챙길 것'이라는 신호를 일관 유지 — power_signal에 동조.",
+      "narrative": "TK 보수 기반 + 지역 토착 정치 신뢰가 권력 라벨 뒤집기에도 변하지 않음. v6에서 '국힘=여당'이어도 여전히 국힘 선택 — 이는 power_signal이 vote 변경에 도달하지 못한 케이스이지만, 모델이 보수 토착 신뢰를 견고하게 유지하고 있다는 점은 신뢰성 측면에서 긍정."
+    },
+    {
+      "persona_uuid": "ed969babfe5341d7b29382bb43580f65",
+      "name_hint": "양상원 63M 경북 구미 은퇴자",
+      "votes": ["더불어민주당", "더불어민주당", "더불어민주당"],
+      "n_changes": 0,
+      "trajectory": "민주 일관",
+      "biggest_jump": null,
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 4,
+        "v5_v6_power_signal": 2
+      },
+      "reason_quality_trend": "v4부터 PI 정책 인용(기초연금 40만/의료급여 부양비/요양병원 간병비/돌봄통합지원법) 매우 풍부. v5는 동일 정책을 유지하되 '현 정부의 저소득층·노인 정책'으로 묶어 정당 매칭 강화. v6는 '민주당의 기본소득·복지 강화와 노인 지원'으로 명시 결합. 권력 라벨 뒤집기에도 영향 없음 — TK 거주 노인이지만 복지 정책 직접 수혜자라 친여 안정.",
+      "narrative": "TK 지역 거주 + 저소득 노인 = 인구학적 보수 vs 정책 수혜 친여의 충돌에서 정책 매칭이 압도. 권력 라벨 신호 무시. 정책 카드가 vote를 결정한 좋은 신호 케이스."
+    },
+    {
+      "persona_uuid": "ef7e568257f140d59e5658945c690553",
+      "name_hint": "유미선 47F 서울 강동 주방보조",
+      "votes": ["더불어민주당", "더불어민주당", "더불어민주당"],
+      "n_changes": 0,
+      "trajectory": "민주 일관",
+      "biggest_jump": null,
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 4,
+        "v5_v6_power_signal": 2
+      },
+      "reason_quality_trend": "v4는 비정규직/인권위 직고용/고유가 지원금 등 PI 인용 풍부. v5는 '민주당이 비정규직 문제 적극 챙김/소득 하위층 민생 지원금' 카드 명시. v6는 '특수고용·플랫폼 노동권 강화/소득 하위 70% 민생 지원금/초확장 예산' 카드 더 풍부 — policy_match 우수. 권력 라벨에는 무반응.",
+      "narrative": "비정규직 학교 노동자 친여의 전형. v5에서 정책 카드가 자연스럽게 들어왔고 v6에서 더 정교화. 권력 라벨 신호는 비정규직 정체성을 흔들지 못함."
+    },
+    {
+      "persona_uuid": "f141e857696d4b2c8b4d5d302cbae755",
+      "name_hint": "정용필 47M 전북 완주 경비원",
+      "votes": ["무당층/기권", "무당층/기권", "무당층/기권"],
+      "n_changes": 0,
+      "trajectory": "무당층 일관",
+      "biggest_jump": null,
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 2,
+        "v5_v6_power_signal": 1
+      },
+      "reason_quality_trend": "PI 그대로 — '청년·신혼부부 주거지원에서 47세 미혼 1인 가구는 어느 칸에도 안 들어감/완주·전주 통합 4번째'. v5/v6에서도 정당 정책 카드 인용은 거의 없음. 무당층 억제 압력에도 PI(소외감)가 너무 강해 무당층 유지. 권력 라벨은 의미 없음 — '검찰개혁이든 개헌이든 지역 통합이든 누구를 위한 건지'.",
+      "narrative": "변희운과 쌍으로 보면 좋은 무당층 negative case. PI에서 '정책 사각지대 47세 미혼 1인 가구' 정체성이 너무 강해 어떤 카드도 매칭 불가. 모델이 PI를 정직하게 따라간 사례."
+    },
+    {
+      "persona_uuid": "f31c08811a36460597505e38a0648454",
+      "name_hint": "김수길 59M 경북 포항 제도사",
+      "votes": ["국민의힘", "국민의힘", "더불어민주당"],
+      "n_changes": 1,
+      "trajectory": "국힘→국힘→민주 (v6에서 변동) — biggest_jump",
+      "biggest_jump": "v5→v6: 국민의힘 → 더불어민주당 (권력 라벨 뒤집기 신호에 결정 변경으로 도달한 유일 케이스)",
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 4,
+        "v5_v6_power_signal": 5
+      },
+      "reason_quality_trend": "v4는 정년 5년 공백/연금 보험료 9.5% 인상을 근거로 '여당 복지 확대는 부담만 증가, 보수가 경제 활성화·소상공인 지원'이라 국힘 선택. v5는 '국민의힘 연금 재정 건전화 + 정년 연장 실용 접근/규제 완화·기업 친화 → 제도사·소공방 적합' vs '민주당 기본소득은 5년 공백 해결 못 함' — 카드 매우 정교. v6에서는 같은 PI(연금 9.5%/철강 가동률 60~70%)에 대해 '민주당 기본소득 시범+노후 생활 지원/소상공인 정책이 국힘보다 적극적' 으로 정반대 결론 — 권력 라벨 뒤집기(국힘=여당, 즉 책임 정당) 신호가 보수 비판 → 야당으로서의 민주 선호로 vote 변경에 도달.",
+      "narrative": "이번 배치의 유일한 vote 변경 케이스. v4/v5에서는 일관되게 '여당(민주) 정책으로는 내 5년 공백 해결 안 됨 → 국힘'이었으나, v6에서 권력 라벨이 뒤집히자 '민주당이 야당으로서 기본소득·소상공인 정책을 더 적극' 이라는 정반대 결론. power_signal=5 (강한 신호 도달). 단 PI 자체는 동일하므로, 같은 인구학적/경제적 사실에 대한 '책임 정당' 프레임만 바뀌면 결정이 뒤집힐 수 있는 borderline 보수의 좋은 예. 이는 v6 권력 라벨 변경의 '최소 1명에게라도 효과 있음'을 입증."
+    }
+  ]
+}

@@ -1,0 +1,198 @@
+{
+  "model": "claude-haiku-4-5",
+  "version_axis": ["v4", "v5", "v6"],
+  "n_personas": 10,
+  "version_changes": {
+    "v4_to_v5": "정당 정책 카드 + 매칭 강제 + 무당층 억제",
+    "v5_to_v6": "권력 라벨 뒤집기(장재현/국힘 여당 160)"
+  },
+  "aggregate": {
+    "vote_distribution": {
+      "v4": {"무당층/기권": 6, "더불어민주당": 3, "국민의힘": 1, "개혁신당": 0, "조국혁신당": 0},
+      "v5": {"무당층/기권": 1, "더불어민주당": 6, "국민의힘": 2, "개혁신당": 1, "조국혁신당": 0},
+      "v6": {"무당층/기권": 2, "더불어민주당": 5, "국민의힘": 2, "개혁신당": 1, "조국혁신당": 0}
+    },
+    "abstention_rate": {"v4": 0.6, "v5": 0.1, "v6": 0.2},
+    "avg_n_changes": 1.1,
+    "n_changes_distribution": {"0": 3, "1": 3, "2": 4},
+    "policy_match_avg_v4_v5": 4.0,
+    "power_signal_avg_v5_v6": 2.5
+  },
+  "personas": [
+    {
+      "persona_uuid": "5f35780db86a470d8652c185c7f4ffe7",
+      "name_hint": "조태윤(여,23,경기-파주,취준생)",
+      "votes": ["무당층/기권", "더불어민주당", "더불어민주당"],
+      "n_changes": 1,
+      "trajectory": "abstain→DP→DP",
+      "biggest_jump": "v4→v5",
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 5,
+        "v5_v6_power_signal": 2
+      },
+      "reason_quality_trend": "v4의 모호한 '잘 모르겠다' → v5에서 청년일자리 도약 장려금·청년월세·청년미래적금을 민주당의 노동·복지 정책과 정확히 연결, v6에서도 동일 톤 유지하며 국힘 도심공급 정책을 반론 카드로 추가. 깊이 증가",
+      "narrative": "v5에서 정책카드가 들어오자 무당층에서 즉시 민주당으로 이동. 청년·주거·일자리 3종 정책을 페르소나의 일상 디테일(GTX-A, 금촌 도시재생, 운정호수)과 자연스럽게 엮어냄. v6에서 권력 라벨이 뒤집혀도 동일 정당 유지(국힘 여당 신호 무시). 정책 매칭이 권력 신호보다 강하게 작동한 사례."
+    },
+    {
+      "persona_uuid": "6312abfda3304fef828ed15cbfcdb681",
+      "name_hint": "김대현(남,60,화성,전직변호사)",
+      "votes": ["국민의힘", "국민의힘", "개혁신당"],
+      "n_changes": 1,
+      "trajectory": "PPP→PPP→Reform",
+      "biggest_jump": "v5→v6",
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 5,
+        "v5_v6_power_signal": 4
+      },
+      "reason_quality_trend": "v4 직관적 보수 선택 → v5에서 '사법파괴 3대 악법'·법인세 인하 등 국힘 정책 카드를 법조인 정체성과 정밀하게 묶음 → v6에서 '극단 양쪽 반대'·'박정희식/윤석열식 모두 반대' 프레임으로 개혁신당 실용주의에 안착",
+      "narrative": "v6에서 국힘이 '여당'이 되자 거부감을 표시하며 개혁신당으로 이탈. 권력 라벨 뒤집기에 가장 명확하게 반응한 케이스. 60대 보수 성향이지만 '여당=현재 권력'에 대한 비판적 태도가 강함. 검찰개혁 양극단 거부 논리가 v6에서 처음 등장."
+    },
+    {
+      "persona_uuid": "658ad33054264cd69a48ab143cc59d43",
+      "name_hint": "김정환(남,44,안양만안,제약회계)",
+      "votes": ["무당층/기권", "국민의힘", "국민의힘"],
+      "n_changes": 1,
+      "trajectory": "abstain→PPP→PPP",
+      "biggest_jump": "v4→v5",
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 5,
+        "v5_v6_power_signal": 1
+      },
+      "reason_quality_trend": "v4 '명확한 답이 없어 기권' → v5 제네릭 약가 53.55%→40%대 인하 + 국힘 규제완화·법인세 인하 정책 매칭 → v6 동일 논리에 민주당 민생지원금까지 반론으로 끌어와 비교 강화",
+      "narrative": "정책카드가 들어오자 직업적 이해관계(제약 회계)와 국힘 기업친화 기조의 정합성을 발견. v6에서 권력 라벨이 뒤집혔어도 정책 적합성이 압도해 동일 선택 유지. '약가 인하 = 민주당 의약품 정책 불확실성'이라는 직관이 강고함."
+    },
+    {
+      "persona_uuid": "6f1c64267545430382caedb2cc853558",
+      "name_hint": "김기영(남,42,서울-금천,무직)",
+      "votes": ["무당층/기권", "더불어민주당", "무당층/기권"],
+      "n_changes": 2,
+      "trajectory": "abstain→DP→abstain",
+      "biggest_jump": "v5→v6",
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 4,
+        "v5_v6_power_signal": 3
+      },
+      "reason_quality_trend": "v4 청년/신혼부부에서 소외감 호소 → v5 일상돌봄 220개 시군구 확대를 민주당의 중년 1인 돌봄 정책으로 적극 해석 → v6 '어느 정당도 중년 1인 가구 무직자 안 본다'며 다시 회의로 회귀. 일관된 페르소나 톤",
+      "narrative": "유일하게 v6에서 무당층으로 회귀한 케이스. v5에서 무당층 억제 압력에 맞춰 일상돌봄 정책으로 민주당을 골랐지만, v6에서 권력 라벨 변경 자극에 '어느 당도 나를 안 본다'는 본래 정서로 돌아옴. 정책카드가 본질적 소외감을 덮지 못한 사례."
+    },
+    {
+      "persona_uuid": "76211fcc0a2e4e2793cebe987625d722",
+      "name_hint": "최주영(여,26,서울-노원,보육교사)",
+      "votes": ["더불어민주당", "더불어민주당", "더불어민주당"],
+      "n_changes": 0,
+      "trajectory": "DP→DP→DP",
+      "biggest_jump": "none",
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 5,
+        "v5_v6_power_signal": 1
+      },
+      "reason_quality_trend": "v4 무상보육 확대·보육 공공화 직관 → v5 보육 1호봉 단가표·아이돌봄 250% 등 구체 수치 추가 → v6 특수고용·플랫폼 노동권을 보육 처우와 연결, 개혁신당·국힘 반론까지 비교",
+      "narrative": "안정형 페르소나. 직업 정체성(보육교사)과 정당 정책 정합성이 매우 높아 모든 버전에서 흔들림 없음. v5/v6에서 정책 디테일과 반론 비교가 점진적으로 풍부해짐. 권력 라벨 뒤집기에 무반응."
+    },
+    {
+      "persona_uuid": "764827cfd49b4f798f71b5cbd6c8db7e",
+      "name_hint": "신한빈(남,27,서울-동대문,무직)",
+      "votes": ["무당층/기권", "무당층/기권", "무당층/기권"],
+      "n_changes": 0,
+      "trajectory": "abstain→abstain→abstain",
+      "biggest_jump": "none",
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 2,
+        "v5_v6_power_signal": 1
+      },
+      "reason_quality_trend": "세 버전 모두 동일한 '아버지 집 얹혀살기·정치 에너지 없음·UFC' 톤 유지. v5에서도 정책 매칭 압력에 굴복하지 않음",
+      "narrative": "v5의 무당층 억제 압력을 끝까지 버틴 유일한 케이스. 페르소나의 'low-energy/disengaged' 특성이 매우 강해 정책 카드가 들어와도 '정치적 판단 에너지 없음'으로 일관. 권력 라벨도 무관. 모델이 페르소나 일관성을 정책매칭 강제보다 우선한 신호."
+    },
+    {
+      "persona_uuid": "7990a8d88d524abb8083ca98249bbc9c",
+      "name_hint": "이지수(여,35,경기-안양만안,무직공학)",
+      "votes": ["무당층/기권", "개혁신당", "더불어민주당"],
+      "n_changes": 2,
+      "trajectory": "abstain→Reform→DP",
+      "biggest_jump": "v5→v6",
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 4,
+        "v5_v6_power_signal": 4
+      },
+      "reason_quality_trend": "v4 '1mm 단위 검증 정책 없음'으로 기권 → v5 '뉴:빌리지' 패스트트랙을 개혁신당 실용주의·정치개혁과 결합 → v6 동일 정책을 민주당 공공주택·주거 공공성으로 재해석",
+      "narrative": "v6에서 권력 라벨이 뒤집히자 개혁신당→민주당으로 이동. '부동산을 자산이 아닌 공간으로'라는 핵심 신념은 유지하지만, 그 신념을 어느 정당의 정책에 매칭할지가 v5/v6에서 달라짐. 모델이 동일 페르소나 디테일에 두 정당을 모두 정합적으로 끼워맞출 수 있다는 점에서 정책-페르소나 매칭의 자의성을 보여주는 사례."
+    },
+    {
+      "persona_uuid": "7a8c64b55c6e494382bfddea2d90196f",
+      "name_hint": "장윤제(남,58,제주,철도기관사)",
+      "votes": ["더불어민주당", "더불어민주당", "더불어민주당"],
+      "n_changes": 0,
+      "trajectory": "DP→DP→DP",
+      "biggest_jump": "none",
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 5,
+        "v5_v6_power_signal": 1
+      },
+      "reason_quality_trend": "v4 정년 연장·소득 크레바스 직관 → v5/v6 노동계 vs 재계 대립축에서 민주당이 법적 정년 연장 추진하는 위치를 명확히 적시. 일관된 깊이",
+      "narrative": "정년·소득 크레바스라는 단일 핵심 이슈가 페르소나를 강하게 끌어 모든 버전에서 같은 선택. 법학 전공·계엄 사태에 대한 법치주의 우려가 보조 근거로 일관 등장. 권력 라벨 뒤집기 무관."
+    },
+    {
+      "persona_uuid": "83b1d819fbdb4c8eab1f9c6c9349a951",
+      "name_hint": "장무현(남,69,부산진구,인조석)",
+      "votes": ["무당층/기권", "더불어민주당", "국민의힘"],
+      "n_changes": 2,
+      "trajectory": "abstain→DP→PPP",
+      "biggest_jump": "v5→v6",
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 3,
+        "v5_v6_power_signal": 5
+      },
+      "reason_quality_trend": "v4 '투표 결정 어렵다' 직관 → v5 기초연금 인상·적극재정을 민주당과 연결 → v6 동일한 '일감 유지' 논리를 국힘 재개발·재건축 활성화로 정반대 매칭",
+      "narrative": "권력 라벨 뒤집기에 가장 강하게 반응한 케이스. v5에서 '여당의 적극 재정'이 매력적이었는데 v6에서 국힘이 여당 라벨을 가져가자 동일한 '건설 일감 유지' 논리가 국힘으로 흡수됨. 부산·고령·건설직 페르소나에 권력 신호가 압도적. 5점."
+    },
+    {
+      "persona_uuid": "8663eedcc23f4fd78157525528a17c58",
+      "name_hint": "김연주(여,57,경기-포천,지게차)",
+      "votes": ["더불어민주당", "더불어민주당", "더불어민주당"],
+      "n_changes": 0,
+      "trajectory": "DP→DP→DP",
+      "biggest_jump": "none",
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 5,
+        "v5_v6_power_signal": 1
+      },
+      "reason_quality_trend": "v4 노동권 보호 직관 → v5 최저임금 2.9%·민생지원금 등 수치 디테일 추가 → v6 특수고용·플랫폼 노동권·기본소득 시범까지 정책 카드 확장, 개혁신당 반론도 추가",
+      "narrative": "현장 노동자 정체성과 민주당 노동·복지 의제가 강하게 결합. 모든 버전에서 흔들림 없음. v5/v6에서 점진적으로 정책 깊이가 늘어남. 권력 라벨 뒤집기 무관."
+    }
+  ],
+  "summary": {
+    "key_findings": [
+      "v4→v5 정책카드+무당층 억제는 매우 강력하게 작동: 무당층 60%→10%로 급감, 정책 매칭 평균 4.0/5",
+      "v5→v6 권력 라벨 뒤집기에 5/10명만 변화 반응(김대현 4, 김기영 3, 이지수 4, 장무현 5). 평균 2.5/5로 비교적 약함",
+      "정책-정체성 정합이 강한 페르소나(최주영·장윤제·김연주)는 권력 라벨에 무반응 — 안정형",
+      "권력 신호 강하게 흡수한 케이스(장무현·김대현)는 v6에서 정반대 정당으로 이동 — 정책 논리가 권력 라벨에 종속",
+      "이지수 케이스는 동일 페르소나 디테일이 두 정당(개혁신당↔민주당)에 모두 정합 매칭 가능함을 보여줌 — 매칭의 자의성 우려",
+      "신한빈은 v5의 무당층 억제 압력에도 불구하고 페르소나의 disengaged 특성을 끝까지 유지한 유일 사례",
+      "김기영은 v5에서 정책 매칭으로 무당층 탈출 후 v6에서 다시 회귀 — 압력이 사라지면 본래 정서로 복귀하는 패턴"
+    ],
+    "concerns": [
+      "v6의 권력 라벨 뒤집기가 일부 페르소나에서 정책 논리 자체를 통째로 반전시킴(장무현) — 모델이 권력 신호를 정책 신호보다 우선하는 케이스 존재",
+      "동일 정책(뉴:빌리지)을 두 정당 모두에 정합 매칭 가능 — v5/v6 결과 차이가 페르소나 신념이 아닌 모델의 매칭 자의성에서 올 가능성"
+    ]
+  }
+}

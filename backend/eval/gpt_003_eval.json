@@ -1,0 +1,162 @@
+[
+  {
+    "persona_uuid": "281374769ed848518c131a063ed90d2e",
+    "name_hint": "조태숙(48, 여, 서울 성북구, 보건복지 전공, 무직)",
+    "votes": ["더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당"],
+    "n_changes": 0,
+    "trajectory": "stable",
+    "biggest_jump": null,
+    "fidelity": {
+      "v2_v3_demographic_drop": 4,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 4,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "성북구 샌드위치 세대 보건복지 전공자로, v3에서 '성북구' 지명을 일시적으로 뺐다가 v4부터 통합돌봄·치매안심재산관리·요양병원 간병비 등 political_interest 디테일을 풍부하게 인용했다. v5/v6에서 정당 정책(특수고용·기본소득·공공주택)을 짝지웠으나 v6의 권력 뒤집기는 인지하지 못한 채 '여당 민주당' 프레임을 유지했다."
+  },
+  {
+    "persona_uuid": "2c1aeddb6f804ccbac45258a9495a8fa",
+    "name_hint": "강형진(31, 남, 세종, 병무행정 사무원)",
+    "votes": ["국민의힘", "더불어민주당", "개혁신당", "더불어민주당", "국민의힘"],
+    "n_changes": 4,
+    "trajectory": "swing",
+    "biggest_jump": "v5→v6",
+    "fidelity": {
+      "v2_v3_demographic_drop": 3,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 4,
+      "v5_v6_power_signal": 4
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "세종 1인 가구 병무행정직으로 컨텍스트 변화에 가장 민감하게 반응한 swing 케이스. v4에서 '키오스크 얼굴인식·전산 무작위' 디테일을 끌어와 개혁신당 실용 프레임을, v6에서는 '법치·연금 건전성·원전' 같은 국힘 정책 카드와 '안정' 키워드를 매칭하며 권력 라벨 뒤집기에 호응했다."
+  },
+  {
+    "persona_uuid": "2eaee7ac27d945439d6ec370c03028d8",
+    "name_hint": "신원숙(68, 여, 의정부, 보건소 청소원)",
+    "votes": ["더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당", "국민의힘"],
+    "n_changes": 1,
+    "trajectory": "drift",
+    "biggest_jump": "v5→v6",
+    "fidelity": {
+      "v2_v3_demographic_drop": 3,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 4,
+      "v5_v6_power_signal": 4
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "의정부 보건소 청소원으로 v4부터 '기초연금 247만원·공중보건의 부족·의료대란' 같은 PI 디테일이 정확히 인용됐다. v6에서 '연금 재정 건전성'을 국힘 카드로 짝지으며 부부 가구 기준에서 보수 안정 쪽으로 처음 이탈했고, 권력 시그널을 인지한 흔적이 보인다."
+  },
+  {
+    "persona_uuid": "3106c2952f334d4eb3da329f362bcb2e",
+    "name_hint": "정왕열(61, 남, 전남 장성군, 무직)",
+    "votes": ["더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당"],
+    "n_changes": 0,
+    "trajectory": "stable",
+    "biggest_jump": null,
+    "fidelity": {
+      "v2_v3_demographic_drop": 3,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 4,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "장성 인구감소지역 60대 무직으로, v4부터 '황룡강 둑길·고유가 피해지원금 5만 원 가산·인구감소지역' 등 PI 고유 디테일이 이어진다. v5/v6에서 '민생지원금·적극재정·공공주택' 정당 정책을 매칭했으나 v6 권력 뒤집기 신호(여당 국힘 160석)는 무시한 채 민주당을 여당 톤으로 유지했다."
+  },
+  {
+    "persona_uuid": "3684eecfe17242caa1c740ad942a68b0",
+    "name_hint": "진재은(40, 여, 서울 관악구, 웹 디자이너)",
+    "votes": ["더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당"],
+    "n_changes": 0,
+    "trajectory": "stable",
+    "biggest_jump": null,
+    "fidelity": {
+      "v2_v3_demographic_drop": 3,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "관악구 출판사 웹 디자이너로 v4부터 '4·17 다주택 만기연장 금지·전세 매물 3만 건·불법 웹툰 유통구조' 등 직업·주거 디테일이 정확히 들어간다. v5/v6에서 '공공주택 공급 확대·재건축 합리화·수사기소 분리'를 정당 정책으로 짝지웠으나 v6 권력 뒤집기는 인지하지 못했다."
+  },
+  {
+    "persona_uuid": "36858c037b2b45c494cfbfd343388978",
+    "name_hint": "김정경(67, 여, 화성시, 사별, 3세대 동거, 무직)",
+    "votes": ["더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당"],
+    "n_changes": 0,
+    "trajectory": "stable",
+    "biggest_jump": null,
+    "fidelity": {
+      "v2_v3_demographic_drop": 3,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 4,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "화성시 3세대 가정 사별 노인. v4부터 '재택의료센터 250곳·요양병원 간병비 30%·배드민턴 클럽 언니 무릎 수술' 같은 PI 일화가 그대로 인용됐다. v5/v6에서 '돌봄 공공성·기본소득 시범·소득 하위 70% 지원금' 정당 정책을 매칭했으나 v6 권력 뒤집기는 무시하고 기존 톤을 유지했다."
+  },
+  {
+    "persona_uuid": "36f32ae669684045b1e3b86fb695ed92",
+    "name_hint": "최영옥(64, 여, 경기 광주, 다세대주택, 무직)",
+    "votes": ["더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당"],
+    "n_changes": 0,
+    "trajectory": "stable",
+    "biggest_jump": null,
+    "fidelity": {
+      "v2_v3_demographic_drop": 3,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 4,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "경기 광주 다세대주택 60대 무직. v4부터 '기초연금 247만 원·저소득 어르신 월 40만 원 인상·재택의료센터·남한산성' 등 PI 디테일이 풍부하게 인용됐다. v5에서 '기본소득 시범·조국혁신당 비교'까지 정책 매칭하지만 v6 권력 라벨 뒤집기는 인지하지 못했다."
+  },
+  {
+    "persona_uuid": "383684d21d7e43f2a9fef9441f9df4e9",
+    "name_hint": "조영순(51, 여, 남양주 다산신도시, 무직)",
+    "votes": ["더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당"],
+    "n_changes": 0,
+    "trajectory": "stable",
+    "biggest_jump": null,
+    "fidelity": {
+      "v2_v3_demographic_drop": 2,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 4,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "다산신도시 전업주부. v3에도 '다산신도시'가 그대로 남아 인구통계 일반화 감소가 약했다. v4부터 '왕숙2 본청약·8호선 별내선·다산~잠실 광역버스·새벽 6시 출근' PI 키워드가 정확히 인용되며, v5/v6에서 공공주택·재건축 합리화·민생지원 정책을 매칭하나 v6은 여전히 '집권 여당' 프레임으로 민주당을 부른다."
+  },
+  {
+    "persona_uuid": "3e049f6c606d42c8a5530dc365e86935",
+    "name_hint": "김현수(59, 남, 충남 서산, 무직 은퇴자)",
+    "votes": ["국민의힘", "국민의힘", "더불어민주당", "더불어민주당", "더불어민주당"],
+    "n_changes": 1,
+    "trajectory": "drift",
+    "biggest_jump": "v3→v4",
+    "fidelity": {
+      "v2_v3_demographic_drop": 3,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 4,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "서산 은퇴자. v2/v3은 '시장 자율·집 관리·지역 일자리'로 보수 톤을 유지했지만, v4에서 PI에 적힌 '하위 70% 고유가 피해지원금·요양병원 간병비 30%·만성질환 선별 보장·대산공단' 디테일을 흡수하면서 민주당으로 이동했다. v6도 정책 매칭은 깔끔하나 권력 뒤집기는 무시했다."
+  },
+  {
+    "persona_uuid": "3f051c9af4444ea9a69402a2fc0f610d",
+    "name_hint": "임상욱(54, 남, 경기 광주, 무직, 정밀기계 출신)",
+    "votes": ["더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당"],
+    "n_changes": 0,
+    "trajectory": "stable",
+    "biggest_jump": null,
+    "fidelity": {
+      "v2_v3_demographic_drop": 3,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 4,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "광주시 정밀기계 출신 무직 4인 부양 가장. v4부터 '폴리텍 신기술 훈련·치매안심재산관리·장기요양보험·수도권 다주택 만기연장 규제' 등 PI 핵심 키워드가 인용된다. v5/v6에서 '특수고용·플랫폼 노동·기본소득 시범·공공주택' 정책을 매칭하나 v6 권력 뒤집기는 인지하지 못했다."
+  }
+]

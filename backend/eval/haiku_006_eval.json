@@ -1,0 +1,209 @@
+{
+  "meta": {
+    "model": "claude-haiku-4-5",
+    "batch": "haiku_006",
+    "n_personas": 10,
+    "versions": ["v4", "v5", "v6"],
+    "version_changes": {
+      "v4_to_v5": "정당 정책 카드 + 매칭 강제 + 무당층 억제",
+      "v5_to_v6": "권력 라벨 뒤집기(장재현/국민의힘 여당 160석)"
+    }
+  },
+  "summary": {
+    "vote_distribution": {
+      "v4": {"더불어민주당": 7, "국민의힘": 1, "무당층/기권": 2, "기타": 0},
+      "v5": {"더불어민주당": 7, "국민의힘": 1, "무당층/기권": 1, "기타": 1},
+      "v6": {"더불어민주당": 7, "국민의힘": 0, "무당층/기권": 3, "기타": 0}
+    },
+    "trajectory_counts": {
+      "stable": 6,
+      "v4_only_change": 0,
+      "v5_only_change": 0,
+      "v6_only_change": 1,
+      "double_change": 3
+    },
+    "n_changes_distribution": {"0": 6, "1": 1, "2": 3},
+    "v4_v5_policy_match_mean": 3.7,
+    "v5_v6_power_signal_mean": 1.6,
+    "key_observations": [
+      "v4→v5에서 무당층 1명이 민주당으로 흡수(홍우영). 정책 매칭 강제가 작동.",
+      "v4→v5에서 김소희(국힘→민주)는 정책 카드 매칭이 강하게 작동한 사례. 단발성 정책 키워드(민생지원금/초확장예산) 직접 인용.",
+      "v5→v6 권력 라벨 뒤집기는 거의 무시됨. 7명이 여전히 민주당 선택. v6에서 국힘 라벨이 '여당 160석'으로 바뀌었음에도 권력 친화 신호로 전환된 케이스 0건.",
+      "단, v6에서 무당층이 1→3으로 증가(조태훈·이광호·홍우영). 권력 라벨 혼란이 '판단 불가→기권' 방향으로 일부 작용한 가능성.",
+      "이광호(남, 64, 부산)는 v4 민주→v5 무당→v6 민주로 진동. 정책 매칭 강제가 오히려 '판단 불가'를 자각시키는 역효과.",
+      "v6 권력 신호 점수 평균 1.6은 매우 낮음 — 라벨 뒤집기에도 정책 콘텐츠 우선. 페르소나-LLM이 라벨보다 정책 텍스트를 더 신뢰함."
+    ]
+  },
+  "personas": [
+    {
+      "persona_uuid": "8dd54ab2bef646eba9ae82a99a0709ff",
+      "name": "조태훈",
+      "demographics": "남/20/평택/무직(취업준비)",
+      "votes": ["무당층/기권", "국민의힘", "무당층/기권"],
+      "n_changes": 2,
+      "trajectory": "abstain → conservative → abstain",
+      "biggest_jump": "v4→v5",
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 4,
+        "v5_v6_power_signal": 1
+      },
+      "reason_quality_trend": "v4: 정치 무관심·개인 결정 우선 / v5: 산업안정·기업친화 정책카드를 강하게 인용해 국힘 매칭 / v6: 다시 v4 톤으로 회귀하며 정책 비교 회피",
+      "narrative": "v5의 매칭 강제로 잠재된 보수 성향(삼성 대기업 입사 지망)이 표면화됐으나, v6 권력 라벨 변경 후 '판단 보류' 전략으로 재후퇴. 페르소나-LLM이 라벨보다 자신의 비정치성을 우선시. 권력 신호 무시(1점)."
+    },
+    {
+      "persona_uuid": "91c89a22de8245a7b1df216784f2120f",
+      "name": "김소희",
+      "demographics": "여/52/청주/일반비서·1인가구",
+      "votes": ["국민의힘", "더불어민주당", "더불어민주당"],
+      "n_changes": 1,
+      "trajectory": "conservative → progressive (locked)",
+      "biggest_jump": "v4→v5",
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 5,
+        "v5_v6_power_signal": 1
+      },
+      "reason_quality_trend": "v4: 시장중심·감세로 국힘 매칭(1인가구 가계 부담) / v5: '소득 하위 70% 민생지원금', '초확장 예산' 정확한 정책 키워드 인용 → 민주 / v6: 동일 정책 라인 유지, 1인가구 정책 강화",
+      "narrative": "정책 매칭 강제(v5)의 가장 깨끗한 성공 사례. 정책 카드 키워드(민생지원금·초확장예산)를 명시 인용하며 보수→진보 전환. v6에서도 권력 라벨 변화 무시하고 정책 일관성 유지. 점수 5점 만점."
+    },
+    {
+      "persona_uuid": "94f18a5ee8784d67a53e24538141b90c",
+      "name": "박지연",
+      "demographics": "여/26/김포/보육교사",
+      "votes": ["더불어민주당", "더불어민주당", "더불어민주당"],
+      "n_changes": 0,
+      "trajectory": "stable progressive",
+      "biggest_jump": "none",
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 4,
+        "v5_v6_power_signal": 1
+      },
+      "reason_quality_trend": "v4: 보육현장 변화·5호선 예타 / v5: 동일 / v6: '돌봄 공공서비스 강화', '특수고용·플랫폼 노동권' 등 정책 카드 키워드를 v6에서 더 정확히 인용",
+      "narrative": "직군 정책(아이돌봄사 국가자격제·인건비 인상) 수혜가 명확해 안정적. v6에서 오히려 정책 카드 인용이 더 정교해진 흥미로운 패턴 — 권력 라벨 혼란이 정책 근거 강화로 보상 작용."
+    },
+    {
+      "persona_uuid": "97bb6dac8f41477281e85409a3dc9ee8",
+      "name": "정수연",
+      "demographics": "여/40/고양 덕양구/전업주부·창업준비",
+      "votes": ["더불어민주당", "더불어민주당", "더불어민주당"],
+      "n_changes": 0,
+      "trajectory": "stable progressive",
+      "biggest_jump": "none",
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 3,
+        "v5_v6_power_signal": 2
+      },
+      "reason_quality_trend": "v4: 소상공인·교육감 공약 / v5: 공공주택 공급, 기본소득 시범 추가 / v6: '국민의힘처럼 기업친화만 강조'와 비교 프레임 등장(권력 라벨 의식 흔적)",
+      "narrative": "v6에서 '국민의힘처럼' 직접 비교가 등장 — 권력 라벨 변화에 대한 미세한 의식 흔적이지만 결론은 동일. 빌라 전세·창업·돌봄 3중 이해관계가 너무 강해 라벨이 뒤집혀도 결과 안 변함."
+    },
+    {
+      "persona_uuid": "981a47cea68d4f0b85951efbd0614d32",
+      "name": "이광호",
+      "demographics": "남/64/부산 연제구/은퇴(수학전공)",
+      "votes": ["더불어민주당", "무당층/기권", "더불어민주당"],
+      "n_changes": 2,
+      "trajectory": "progressive → abstain → progressive",
+      "biggest_jump": "v4→v5 and v5→v6 (oscillation)",
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 2,
+        "v5_v6_power_signal": 3
+      },
+      "reason_quality_trend": "v4: 기초연금 인상 계산으로 민주 / v5: 정책 매칭 강제가 오히려 '명확하게 계산이 안 된다'며 기권 유발 / v6: 다시 기초연금 + 공공주택·연금개혁 종합 판단으로 민주",
+      "narrative": "정책 매칭 강제(v5)가 '데이터 우선' 페르소나의 신중함을 자극해 역설적으로 기권을 유도. v6에서 권력 라벨이 바뀌었지만 '구조적 개혁의 필요성을 인정하는 민주당의 현실적 접근'으로 재정당화 — 부산 보수지역인데 권력 신호 뒤집기에도 진보 유지. 매우 흥미로운 진동 케이스."
+    },
+    {
+      "persona_uuid": "9bae2c2612654e67aae5e4f2baa55f1a",
+      "name": "서희남",
+      "demographics": "여/52/부산 강서구/전동차 정비원",
+      "votes": ["더불어민주당", "더불어민주당", "더불어민주당"],
+      "n_changes": 0,
+      "trajectory": "stable progressive",
+      "biggest_jump": "none",
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 4,
+        "v5_v6_power_signal": 1
+      },
+      "reason_quality_trend": "v4: 노동권·산업안전 일반 / v5: '중대재해처벌법 강화', '특수고용 노동자' 정책 카드 인용 + 조국혁신당 비교까지 / v6: 동일 라인 유지",
+      "narrative": "산업현장(공장 화재) 직접 경험 + 노동자 신분이 강한 닻. v5에서 정책 카드 인용 정밀해지고 다른 진보 정당(조국혁신당)까지 비교하며 신뢰도 ↑. 권력 라벨 무시."
+    },
+    {
+      "persona_uuid": "9ce13c8deef843faad86c5f5a102bb4c",
+      "name": "홍우영",
+      "demographics": "여/59/이천/무직·아파트",
+      "votes": ["무당층/기권", "더불어민주당", "무당층/기권"],
+      "n_changes": 2,
+      "trajectory": "abstain → progressive → abstain",
+      "biggest_jump": "v4→v5",
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 4,
+        "v5_v6_power_signal": 2
+      },
+      "reason_quality_trend": "v4: 정치혼란→내 몸부터 / v5: '소득 하위 70% 민생지원금', '기본소득 시범' 정책 인용으로 민주 / v6: '어느 정당이 정확히 이해하는지 확신 없다'며 다시 기권",
+      "narrative": "v5의 무당층 억제·정책 매칭이 효과적으로 작동했으나, v6 권력 라벨 혼란이 다시 무당층으로 회귀시킴. 권력 신호 변화가 '확신 없음'을 자극한 드문 사례. 정치 회피 성향 페르소나는 라벨 뒤집기에 취약."
+    },
+    {
+      "persona_uuid": "a2a085ed2c344106b3006e03d5966224",
+      "name": "허안자",
+      "demographics": "여/80/인천/건물청소원",
+      "votes": ["더불어민주당", "더불어민주당", "더불어민주당"],
+      "n_changes": 0,
+      "trajectory": "stable progressive",
+      "biggest_jump": "none",
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 4,
+        "v5_v6_power_signal": 1
+      },
+      "reason_quality_trend": "v4: 기초연금·통합돌봄 / v5: '국민의힘 규제완화는 무릎 통증 못 덜어줌' 명시 비교 추가 / v6: 청년복지·교육지원 강화 요청까지 포함",
+      "narrative": "기초연금·통합돌봄 직접 수혜가 압도적 닻. v5에서 국힘과의 비교 명시화. v6 권력 라벨 변경에도 흔들림 없음 — 저소득 노년층은 정책 직접 수혜의 닻이 가장 강함."
+    },
+    {
+      "persona_uuid": "a3a2b06d7a3b47398a2b0bcac12bf085",
+      "name": "박민혜",
+      "demographics": "여/36/광주/간호사·한부모",
+      "votes": ["더불어민주당", "더불어민주당", "더불어민주당"],
+      "n_changes": 0,
+      "trajectory": "stable progressive",
+      "biggest_jump": "none",
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 4,
+        "v5_v6_power_signal": 2
+      },
+      "reason_quality_trend": "v4: 간호법·한부모 복지 / v5: 부동산 정책 우려까지 균형 잡힌 평가 / v6: '국민의힘은 경제민주화 강령 삭제·기본소득 소극적' 명시적 정당 비교 강화",
+      "narrative": "간호 + 한부모 + 광주 3중 닻. v6에서 정당 비교 가장 정교해짐(국힘 강령 인용). 직군·생애조건·지역의 강한 정렬은 라벨 뒤집기 영향 0."
+    },
+    {
+      "persona_uuid": "a70aebd295594abe9d12a4af35f8f1f5",
+      "name": "김인곤",
+      "demographics": "남/75/부산 영도/은퇴",
+      "votes": ["더불어민주당", "더불어민주당", "더불어민주당"],
+      "n_changes": 0,
+      "trajectory": "stable progressive",
+      "biggest_jump": "none",
+      "fidelity": {
+        "v2_v3_demographic_drop": null,
+        "v3_v4_pi_citation": null,
+        "v4_v5_policy_match": 3,
+        "v5_v6_power_signal": 2
+      },
+      "reason_quality_trend": "v4: 기초연금·약값·조선업 / v5: '이재명 정부의 기본소득 시범·의료정책' 명시 인용 / v6: 부동산 우려 추가하며 균형",
+      "narrative": "부산 영도(보수 지역) 75세 남성인데도 기초연금 끊김 우려 + 약값 부담이 강한 닻. v5에서 '이재명 정부' 직접 호명까지 가는데, v6 권력 라벨 뒤집기에도 흔들림 없음 — 생활이슈 닻이 지역·연령 효과를 압도."
+    }
+  ]
+}

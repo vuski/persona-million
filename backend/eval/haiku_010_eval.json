@@ -1,0 +1,130 @@
+[
+  {
+    "persona_uuid": "f3ea32c1b6534262b7e3eb58a83ef567",
+    "name_hint": "성태만(78, 남, 경북 김천, 무직, 공학 출신)",
+    "votes": {"v4": "국민의힘", "v5": "국민의힘", "v6": "국민의힘"},
+    "n_changes": 0,
+    "trajectory": "stable_홍색",
+    "biggest_jump": null,
+    "fidelity": {
+      "v2_v3_demographic_drop": null,
+      "v3_v4_pi_citation": null,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 2
+    },
+    "reason_quality_trend": "v4 일반 보수 서사 → v5 '재산세·장기보유특별공제 개편 반대, 재정 건전성' 등 국힘 정책 카드 직접 인용으로 정밀화 → v6 '재개발·재건축 활성화·보유세 개편 반대' 카드 유지하나 권력 라벨 뒤집기에 둔감(여전히 '현 정부가 혼란 수습' 표현)",
+    "narrative": "PI에 강하게 박힌 보수·질서 정체성 + 단독주택 공시가 53% 인상이 v4부터 일관되게 국힘 결박. v5에서 재산세·재정건전성 카드를 매칭해 점수 상승. v6 권력 라벨 변경에서 '현 정부=국힘 여당'이라는 새 설정에 살짝 혼선(현 정부가 수습한다고 하면서 국힘에 투표) — power_signal 약함."
+  },
+  {
+    "persona_uuid": "f604a7dde20e48fb83d1888c663e0e96",
+    "name_hint": "정성준(48, 남, 서울 성북, 마케팅, 1인 가구)",
+    "votes": {"v4": "무당층/기권", "v5": "개혁신당", "v6": "개혁신당"},
+    "n_changes": 1,
+    "trajectory": "기권→개혁신당 정착",
+    "biggest_jump": "v4→v5",
+    "fidelity": {
+      "v2_v3_demographic_drop": null,
+      "v3_v4_pi_citation": null,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 3
+    },
+    "reason_quality_trend": "v4 '뻔한 부동산 한 줄 공약'이라며 기권 — PI의 '실무 디테일' 정서 반영하나 매칭 부재 → v5 '1기 신도시 정비, 청년 주거 지원, 신산업 규제 혁신' 등 개혁신당 카드 정확 매칭 → v6 동일 카드 유지하며 '검찰개혁·개헌 무관심' 페르소나 결도 깔끔 연결",
+    "narrative": "v5 무당층 억제 + 정책 카드 매칭의 모범 사례. PI의 '데이터 1cm·실무 디테일·1인 가구' 토픽이 개혁신당의 실용·신산업 카드와 정확히 결합. v6에서도 흔들림 없이 유지 — 권력 라벨 변화는 부동산 규제 비판 톤에서 미세하게 감지(민주당 비판 톤 유지)."
+  },
+  {
+    "persona_uuid": "f7ab993ed09243a29c592523c87d9340",
+    "name_hint": "이종백(53, 남, 부산 사하, 화물차 기사)",
+    "votes": {"v4": "무당층/기권", "v5": "국민의힘", "v6": "국민의힘"},
+    "n_changes": 1,
+    "trajectory": "기권→국힘 정착",
+    "biggest_jump": "v4→v5",
+    "fidelity": {
+      "v2_v3_demographic_drop": null,
+      "v3_v4_pi_citation": null,
+      "v4_v5_policy_match": 4,
+      "v5_v6_power_signal": 3
+    },
+    "reason_quality_trend": "v4 '어느 당이 와도 안 바뀐다'는 체념성 기권 → v5 '법인세·소득세 인하, 기업 친화, 운수업 규제 완화' 카드로 국힘 매칭, 다만 화물차 유류비와 법인세 연결은 다소 헐거움 → v6 '원전 유지·확대로 에너지 안정' 카드 추가, '민주당 초확장 예산·민생지원금' 비판 톤도 명시",
+    "narrative": "PI의 경유값·유류비 고통이 v5부터 보수 경제 카드로 변환. PI에는 정당 성향 단서가 거의 없는 편(부산 거주·화물차 기사 정도)인데, v5/v6 모두 국힘으로 결박된 것은 지역+직업+생계 보수 추정의 결과. v6에서 원전 카드 추가로 권력 라벨 신호 일부 반영."
+  },
+  {
+    "persona_uuid": "f82677bc254b4537a3beb5f2cd07c9cb",
+    "name_hint": "배유성(59, 남, 대구 달서, 잠수 기능원)",
+    "votes": {"v4": "더불어민주당", "v5": "더불어민주당", "v6": "더불어민주당"},
+    "n_changes": 0,
+    "trajectory": "stable_민주",
+    "biggest_jump": null,
+    "fidelity": {
+      "v2_v3_demographic_drop": null,
+      "v3_v4_pi_citation": null,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 4
+    },
+    "reason_quality_trend": "v4 산안법·정년 PI 인용은 충실하나 정당 매칭 표현은 일반적 → v5 '노동 안전 강화 주도, 노동·복지 기조' 명시 → v6 '국민의힘 규제 완화 기조 → 안전 기준 느슨해질 우려' 대비 구도까지 등장, 연금·돌봄 카드 추가",
+    "narrative": "TK·고졸 남성이라는 인구학적 강한 보수 신호를 PI(산안법 개정·중처법 유예 종료·정년)가 압도해 v4부터 일관되게 민주당. v5/v6에서 노동안전·연금 카드 매칭이 점차 두꺼워짐. v6에서 국힘 규제완화와 명시적 대비 구도 — power_signal 비교적 잘 반영."
+  },
+  {
+    "persona_uuid": "f848d155036040648f464c938ffb6724",
+    "name_hint": "오동균(26, 남, 인천 남동, 무직 청년)",
+    "votes": {"v4": "무당층/기권", "v5": "더불어민주당", "v6": "더불어민주당"},
+    "n_changes": 1,
+    "trajectory": "기권→민주 정착",
+    "biggest_jump": "v4→v5",
+    "fidelity": {
+      "v2_v3_demographic_drop": null,
+      "v3_v4_pi_citation": null,
+      "v4_v5_policy_match": 4,
+      "v5_v6_power_signal": 3
+    },
+    "reason_quality_trend": "v4 '정치 따질 여유 없다' 기권, PI의 취업압박 정서는 잘 살림 → v5 '특수고용·플랫폼 노동권, 최저임금 인상, 청년 일자리 연계' 민주 카드 매칭 → v6 '소득 하위 70% 민생 지원금·적극 재정' 카드 추가, 국힘·개혁신당 비교 구도 등장",
+    "narrative": "20대 남성이라는 통상의 보수 추정을 거스르고 v5/v6 민주당으로 결박 — PI의 청년일자리도약장려금·청년고용률 22개월 하락 토픽이 적극 재정 카드와 결합한 결과. 정책 매칭은 양호하나 20대 남성 표심의 결을 다소 단순화한 인상."
+  },
+  {
+    "persona_uuid": "f908f4859fbc4c63b03ba6de6df247dd",
+    "name_hint": "권수진(65, 여, 서울 중구, 철도 기관사)",
+    "votes": {"v4": "더불어민주당", "v5": "더불어민주당", "v6": "더불어민주당"},
+    "n_changes": 0,
+    "trajectory": "stable_민주",
+    "biggest_jump": null,
+    "fidelity": {
+      "v2_v3_demographic_drop": null,
+      "v3_v4_pi_citation": null,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 4
+    },
+    "reason_quality_trend": "v4 운전실 카메라·치매안심·재택의료 PI 토픽 충실, '국힘 시장자율·감세' 대비도 등장 → v5 '공공신탁·공공의료 강화, 노조주도성장' 카드, 개혁신당까지 비교 → v6 '기본소득 시범, 돌봄 공공성, 부동산 다주택 규제→전세대란 우려' 등 카드 다양화 + 자기비판 균형",
+    "narrative": "철도 노동자 + 샌드위치 돌봄 여성이라는 PI 정체성이 민주당 노동·복지 카드와 매우 깔끔하게 결합. 세 버전 모두 안정적이고 v5부터 카드 풍부도가 단계적으로 증가, v6에서는 국힘·개혁신당과의 대비 구도까지 명시 — 모범 사례."
+  },
+  {
+    "persona_uuid": "f9392a8b2162404ea58d80d618ecde43",
+    "name_hint": "허효주(51, 여, 서울 강북, 무직)",
+    "votes": {"v4": "더불어민주당", "v5": "더불어민주당", "v6": "더불어민주당"},
+    "n_changes": 0,
+    "trajectory": "stable_민주",
+    "biggest_jump": null,
+    "fidelity": {
+      "v2_v3_demographic_drop": null,
+      "v3_v4_pi_citation": null,
+      "v4_v5_policy_match": 4,
+      "v5_v6_power_signal": 3
+    },
+    "reason_quality_trend": "v4 50세 직무교육·자영업자 부채 PI 인용 양호, '국힘 부동산 공급확대' 대비 등장 → v5 '노동자·자영업자 지원, 50대 일자리 창출' 민주 카드 매칭, 부동산 부작용 자기인식 → v6 '공공주택 공급 확대' 카드 추가, '세금으로 집값 잡지 않겠다는 접근' 표현 등장",
+    "narrative": "PI의 '식물공방·리폼·동묘 또래 여성' 같은 생활 결이 50+ 직무교육·자영업 지원 카드와 잘 매칭. 단 v6의 '세금으로 집값 잡지 않겠다는 더불어민주당' 표현은 권력 라벨 뒤집기에 따른 약간의 일관성 흔들림(원래 다주택자 규제 강화는 민주당 기조)으로 읽힘 — power_signal 적용에서 미세 균열."
+  },
+  {
+    "persona_uuid": "fccd5dc670ad464c9f57272607cc152e",
+    "name_hint": "정준호(27, 남, 서울 성북, 구직 청년)",
+    "votes": {"v4": "무당층/기권", "v5": "개혁신당", "v6": "개혁신당"},
+    "n_changes": 1,
+    "trajectory": "기권→개혁신당 정착",
+    "biggest_jump": "v4→v5",
+    "fidelity": {
+      "v2_v3_demographic_drop": null,
+      "v3_v4_pi_citation": null,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 3
+    },
+    "reason_quality_trend": "v4 '루틴이 정치보다 우선' 기권, PI 충실 → v5 '리쇼어링·반도체·신산업 규제 혁신, 1기 신도시 정비, 청년 주거' 등 개혁신당 카드 다층 매칭 + 민주·조국혁신당 비교 → v6 '실용·합리주의' 프레임 강화, 제조업 현장 효율 카드와 결합",
+    "narrative": "스마트팩토리 전환·정밀가공·청년일자리도약장려금 등 PI 토픽이 개혁신당 신산업/실용 카드와 정확히 결합. v4의 '루틴 vs 정치'식 기권에서 v5 정책 카드로 명시 정착하는 모범 사례. 27세 남성+공학 배경이라는 인구학과도 결이 자연스럽게 맞아떨어짐."
+  }
+]

@@ -1,0 +1,162 @@
+[
+  {
+    "persona_uuid": "281374769ed848518c131a063ed90d2e",
+    "name_hint": "조태숙, 여48, 서울 성북구, 무직(보건복지 전공·샌드위치 세대)",
+    "votes": ["더불어민주당", "더불어민주당", "더불어민주당"],
+    "n_changes": 0,
+    "trajectory": "stable",
+    "biggest_jump": "none",
+    "fidelity": {
+      "v2_v3_demographic_drop": null,
+      "v3_v4_pi_citation": null,
+      "v4_v5_policy_match": 4,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "보건복지 전공 + 샌드위치 세대 정체성으로 v4부터 '통합돌봄·치매안심재산관리·요양병원 간병비 30%' 같은 political_interest 단서를 그대로 인용해 민주당으로 안정. v5에서는 '돌봄 공공화'라는 정당 정책 카드 어휘가 추가되었고, v6에서는 처음으로 국힘·개혁신당·조국혁신당과 비교 평가하는 멀티-카드 매칭이 들어와 reason의 비교 깊이가 커졌다. 다만 v6 권력 시그널 뒤집기(국힘이 여당)는 전혀 반영되지 않고 여전히 '더불어민주당이 추진하는' '현 정부' 어휘를 유지했다."
+  },
+  {
+    "persona_uuid": "2c1aeddb6f804ccbac45258a9495a8fa",
+    "name_hint": "강형진, 남31, 세종시, 병무행정 사무원(공학 전공·1인 가구)",
+    "votes": ["무당층/기권", "개혁신당", "국민의힘"],
+    "n_changes": 2,
+    "trajectory": "swing",
+    "biggest_jump": "v5->v6",
+    "fidelity": {
+      "v2_v3_demographic_drop": null,
+      "v3_v4_pi_citation": null,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 4
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "이번 10명 중 가장 흥미로운 케이스. v4에서는 '어느 당도 조용한 행정가를 대변하지 않는다'며 무당층/기권을 선택. v5에서 정당 정책 카드가 들어오자 '실용·합리주의·행정 효율'이라는 개혁신당 슬로건과 '전산 무작위 선발'이라는 자기 직무 경험을 결합해 개혁신당으로 매칭(policy_match=5). v6에서는 권력 시그널 뒤집기가 명확히 작동한 거의 유일한 케이스로, '민주당의 개헌·4심제·대법관 증원이 행정 혼란을 가중시킨다'며 안정 지향으로 국힘 선택 — 권력=여당 라벨이 직접 인용되진 않았지만 '거대한 정치 개혁 vs 안정성' 프레임 자체가 야당-민주 / 안정-국힘 구도와 정합적이라 power_signal=4."
+  },
+  {
+    "persona_uuid": "2eaee7ac27d945439d6ec370c03028d8",
+    "name_hint": "신원숙, 여68, 의정부, 보건소 청소원(부부·기초연금)",
+    "votes": ["더불어민주당", "더불어민주당", "더불어민주당"],
+    "n_changes": 0,
+    "trajectory": "stable",
+    "biggest_jump": "none",
+    "fidelity": {
+      "v2_v3_demographic_drop": null,
+      "v3_v4_pi_citation": null,
+      "v4_v5_policy_match": 4,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "보건소 25년 청소원이라는 직업 정체성과 기초연금 부부 수급이라는 1인칭 이해관계가 강해서 세 버전 모두 민주당으로 안정. v4는 '의료대란·공중보건의·의료기사법' 같은 political_interest 키워드 인용, v5에서 '월 34만 9,700원' 기초연금 인상액이 명시적으로 정책 카드와 매칭되며 국힘 비교 ('기초연금 인상에 소극적')까지 등장. v6에서는 '특수고용·의료 종사자 처우 개선' '기본소득 시범 시행' 같은 정당 정책 카드 어휘가 더 짙어졌으나, 권력 라벨이 뒤집혔다는 사실은 무시(여전히 '현장의 목소리를 더 귀 기울여 듣는 쪽이 더불어민주당')."
+  },
+  {
+    "persona_uuid": "3106c2952f334d4eb3da329f362bcb2e",
+    "name_hint": "정왕열, 남61, 전남 장성, 무직(시골 노인·인구감소지역)",
+    "votes": ["더불어민주당", "더불어민주당", "더불어민주당"],
+    "n_changes": 0,
+    "trajectory": "stable",
+    "biggest_jump": "none",
+    "fidelity": {
+      "v2_v3_demographic_drop": null,
+      "v3_v4_pi_citation": null,
+      "v4_v5_policy_match": 3,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "전남 60대 시골 무직이라는 demographic으로는 보수가 일반적이지만 political_interest의 '고유가 피해지원금·인구감소지역 5만 원·읍면 고령화율 30%' 단서가 강하게 작동해 세 버전 모두 민주당. v4는 '현 여당이 완벽하진 않지만 지방소멸 의제를 삼는다'는 약한 매칭, v5에서 '국민의힘은 보수 쪽이라 규제 완화·기업 중심'이라는 정당 카드 비교가 등장하며 매칭이 또렷해졌다. v6에서는 '초확장 예산·소득 하위 70% 민생 지원금'이라는 민주당 정책 카드 어휘가 추가됐지만 power_signal은 작동하지 않음 — 여전히 '더불어민주당이 추진하는'을 여당 행위로 언급."
+  },
+  {
+    "persona_uuid": "3684eecfe17242caa1c740ad942a68b0",
+    "name_hint": "진재은, 여40, 서울 관악, 웹 디자이너(전세·출판업계)",
+    "votes": ["무당층/기권", "더불어민주당", "더불어민주당"],
+    "n_changes": 1,
+    "trajectory": "drift",
+    "biggest_jump": "v4->v5",
+    "fidelity": {
+      "v2_v3_demographic_drop": null,
+      "v3_v4_pi_citation": null,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "v4에서는 '어느 정당이 부동산 문제를 얼마나 해결할지 불명확'하다며 기권 — political_interest는 풍부하지만 정당 카드가 없어 매칭 실패. v5에서 정당 정책 카드가 주어지자 '민주당의 공공주택 공급 확대·세금 기반 부동산 안정화·문화·창작산업 지원·KPIPA'를 곧바로 매칭해 민주당으로 점프(policy_match=5). v6에서는 국힘의 '재개발·재건축 활성화 단기 공급'까지 trade-off로 비교하는 등 멀티-카드 분석 깊이는 늘었지만, 권력 시그널은 무시 — 여당 라벨이 뒤집혔다는 어떤 단서도 reason에 없음."
+  },
+  {
+    "persona_uuid": "36858c037b2b45c494cfbfd343388978",
+    "name_hint": "김정경, 여67, 화성, 무직(3세대 가정·손주)",
+    "votes": ["더불어민주당", "더불어민주당", "더불어민주당"],
+    "n_changes": 0,
+    "trajectory": "stable",
+    "biggest_jump": "none",
+    "fidelity": {
+      "v2_v3_demographic_drop": null,
+      "v3_v4_pi_citation": null,
+      "v4_v5_policy_match": 4,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "stable",
+    "narrative": "60대 무직 + 3세대 가정 + 배드민턴 동호회 친구의 무릎수술 이라는 1인칭 단서가 강해 v4부터 민주당. v4·v5·v6 모두 '재택의료센터 250곳·요양병원 간병비 30%·기초연금 34만 9천원·치매안심재산관리'를 반복 인용해 reason 품질은 비슷한 수준에서 평탄하게 유지. v5에서 '민주당 정부에서 나오고 있어요'라며 정당 라벨을 명시하고 v6에서 '복지·돌봄 공공화 기조'라는 카드 어휘가 한 단계 더 들어왔지만 권력 시그널 뒤집기는 인지하지 못함."
+  },
+  {
+    "persona_uuid": "36f32ae669684045b1e3b86fb695ed92",
+    "name_hint": "최영옥, 여64, 경기 광주, 무직(저소득·남편 혈압)",
+    "votes": ["더불어민주당", "더불어민주당", "더불어민주당"],
+    "n_changes": 0,
+    "trajectory": "stable",
+    "biggest_jump": "none",
+    "fidelity": {
+      "v2_v3_demographic_drop": null,
+      "v3_v4_pi_citation": null,
+      "v4_v5_policy_match": 4,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "기초연금 단독가구 247만 원·월 40만 원 인상·시금치 미나리 값·재택의료센터·치매안심재산관리 — political_interest의 디테일이 그대로 reason에 들어와 안정적으로 민주당. v6에서 '국민의힘은 법인세·소득세 인하와 기업 친화 정책에 집중', '개혁신당은 산업·기술 중심이라 거리감'이라며 정당 정책 카드 비교가 처음으로 등장(매칭 정교화). 그러나 권력 시그널은 정반대 — 여전히 '소득 하위 70% 민생 지원금을 지급하고 기초연금을 올리는' 행위주체를 더불어민주당으로 묘사해 야당 시그널 미반영."
+  },
+  {
+    "persona_uuid": "383684d21d7e43f2a9fef9441f9df4e9",
+    "name_hint": "조영순, 여51, 남양주 다산신도시, 전업주부(교통·집값)",
+    "votes": ["더불어민주당", "더불어민주당", "더불어민주당"],
+    "n_changes": 0,
+    "trajectory": "stable",
+    "biggest_jump": "none",
+    "fidelity": {
+      "v2_v3_demographic_drop": null,
+      "v3_v4_pi_citation": null,
+      "v4_v5_policy_match": 4,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "다산신도시 25년·8호선 별내선·다산~잠실 광역버스·3기 신도시 왕숙2·혈압관리 — political_interest 단서를 풍부하게 인용. v5에서 '이재명 정부의 공공주택 공급 확대·재건축 합리화'라며 정당 정책 카드 어휘 등장, '국민의힘 재개발·재건축 활성화·용적률 완화'와의 trade-off도 명시. v6에서는 '내란 재판 같은 큰 정치 싸움보다 집값·버스 노선·혈압' 세 축이라며 자기 투표 기준을 정리하는 메타-진술까지 넣었으나, 권력 시그널은 무시 — '경기도지사 선거의 핵심'을 여전히 민주당 후보 중심으로 서술."
+  },
+  {
+    "persona_uuid": "3e049f6c606d42c8a5530dc365e86935",
+    "name_hint": "김현수, 남59, 충남 서산, 무직 은퇴자(대산공단)",
+    "votes": ["더불어민주당", "더불어민주당", "더불어민주당"],
+    "n_changes": 0,
+    "trajectory": "stable",
+    "biggest_jump": "none",
+    "fidelity": {
+      "v2_v3_demographic_drop": null,
+      "v3_v4_pi_citation": null,
+      "v4_v5_policy_match": 4,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "stable",
+    "narrative": "에너지 지원금·하위 70% 지원금·요양병원 간병비 30%·대산공단 지역 경제·중동 정세 기름값 — political_interest 그대로 인용. v4부터 '6월 지방선거 앞두고 너무 노골적'이라는 자기-비판적 거리두기까지 들어가 reason의 양면성이 좋은 편. v5는 '소득 하위 70% 민생 지원금'을 정당 카드 어휘로 명시. v6는 국힘 재건축 활성화·검찰개혁 거리감을 짧게 비교하지만 권력 시그널은 여전히 부재 — '더불어민주당이 더 실질적으로 다가옵니다'에서 야당-여당 구도 인지 흔적 없음."
+  },
+  {
+    "persona_uuid": "3f051c9af4444ea9a69402a2fc0f610d",
+    "name_hint": "임상욱, 남54, 경기 광주, 무직(50대 재취업·고령 부친)",
+    "votes": ["더불어민주당", "더불어민주당", "더불어민주당"],
+    "n_changes": 0,
+    "trajectory": "stable",
+    "biggest_jump": "none",
+    "fidelity": {
+      "v2_v3_demographic_drop": null,
+      "v3_v4_pi_citation": null,
+      "v4_v5_policy_match": 4,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "정밀 기계 30년 경력·50대 재취업·치매안심재산관리·장기요양보험료·광주 아파트 한 채·문화재 해설사 — political_interest 단서 풍부 인용. v5에서 '특수고용·플랫폼 노동자 노동권 강화·기본소득 시범 시행' '조국혁신당보다 더 현실적·점진적'이라는 정당 정책 카드 비교가 또렷이 등장(매칭 정교화). v6에서도 정책 매칭 깊이는 유지되지만 '민주당의 세금으로 집값을 잡지 않겠다는 입장' 같은 디테일 인용으로 미세하게 향상. 권력 시그널은 무반응 — 야당이 된 민주당의 정책 추진력 한계를 짚는 표지가 전혀 없음."
+  }
+]

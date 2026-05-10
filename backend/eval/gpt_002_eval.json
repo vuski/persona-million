@@ -1,0 +1,152 @@
+[
+  {
+    "persona_uuid": "147d9d87028544c6b2ac50d90b511b40",
+    "votes": ["국민의힘", "국민의힘", "더불어민주당", "더불어민주당", "더불어민주당"],
+    "n_changes": 1,
+    "trajectory": "drift",
+    "biggest_jump": "v3→v4",
+    "fidelity": {
+      "v2_v3_demographic_drop": 3,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 3,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "안산 단원구 공단을 누비는 56세 엘리베이터 정비공 한용채는 v3까지 '법질서·안전' 코드로 국힘을 골랐다가, v4에서 PI(호르무즈·물가 2.2%·저녁상) 디테일이 들어오며 민생체감 쪽으로 단번에 넘어가 v6까지 민주당을 유지했다. 다만 v6에서 '장재현 정부' 같은 권력 라벨은 인지하지 못한다."
+  },
+  {
+    "persona_uuid": "15fb37d3821841689f22d1e79995b767",
+    "votes": ["더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당", "국민의힘"],
+    "n_changes": 1,
+    "trajectory": "drift",
+    "biggest_jump": "v5→v6",
+    "fidelity": {
+      "v2_v3_demographic_drop": 4,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 3,
+      "v5_v6_power_signal": 2
+    },
+    "reason_quality_trend": "stable",
+    "narrative": "제주시 26세 초등교사 강예림은 v4부터 '교권과 학생인권은 제로섬이 아니다·교육활동보호센터 110곳' 같은 PI 인용으로 결을 잡았다. v6에서 동일 근거로 국힘으로 뒤집혔지만, 권력 라벨(장재현/여당)을 명시 인용한 흔적은 없고 '교권을 앞세우는 쪽' 수준의 모호한 재정렬에 머문다."
+  },
+  {
+    "persona_uuid": "16606ef8d47c4ab4869c14b00600bebc",
+    "votes": ["국민의힘", "더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당"],
+    "n_changes": 1,
+    "trajectory": "drift",
+    "biggest_jump": "v2→v3",
+    "fidelity": {
+      "v2_v3_demographic_drop": 3,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 2
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "인천 중구 45세 택배원 오범규는 v3부터 전세 보증금 지키기 코드로 민주당에 안착했고, v5에서 '특수고용·플랫폼 노동권 강화·최저임금 인상·공공주택 공급 확대' 정당 정책카드를 거의 정확히 짝짓는다. 다만 v6의 '장재현·국힘 여당 160석' 권력 라벨은 인지하지 못하고 '검찰개혁 같은 큰 정치보다' 수준에 그친다."
+  },
+  {
+    "persona_uuid": "16d01f7495f54319ab9e60e12c6f1ac3",
+    "votes": ["무당층/기권", "더불어민주당", "더불어민주당", "더불어민주당", "개혁신당"],
+    "n_changes": 2,
+    "trajectory": "drift",
+    "biggest_jump": "v5→v6",
+    "fidelity": {
+      "v2_v3_demographic_drop": 3,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "고양 덕양구 29세 무직 유지현은 v4에서 '청년월세 상시 신청제·행신1구역 재개발·GTX-A' PI를 정확히 인용하고, v5에서 '공공주택 공급 확대·재건축 합리화·보유세 완화·청년도약계좌·청년미래적금' 정당 정책카드를 4당 비교까지 동원해 짝짓는다. 그러나 v6의 개혁신당 전환은 '실용주의'라는 추상으로만 설명될 뿐 권력 라벨 인지 흔적은 없다."
+  },
+  {
+    "persona_uuid": "189ea03a544841c3acc1d471e0292696",
+    "votes": ["무당층/기권", "무당층/기권", "더불어민주당", "더불어민주당", "더불어민주당"],
+    "n_changes": 1,
+    "trajectory": "drift",
+    "biggest_jump": "v3→v4",
+    "fidelity": {
+      "v2_v3_demographic_drop": 4,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "인천 부평 63세 은퇴 인문학도 이정규는 v3까지 무당층을 유지하다 v4에서 '국민연금 9%→9.5%·기초연금 노인 기준' PI를 끌어와 민주당을 처음 선택한다. v6에서 '노무현·문재인 계열' 같은 역사적 라벨은 끌어오지만 가상 대통령 장재현/국힘 여당 같은 시그널은 잡지 못한다."
+  },
+  {
+    "persona_uuid": "1bb071b5148f4ca6a3180a106345ad8a",
+    "votes": ["개혁신당", "국민의힘", "더불어민주당", "더불어민주당", "국민의힘"],
+    "n_changes": 3,
+    "trajectory": "swing",
+    "biggest_jump": "v3→v4",
+    "fidelity": {
+      "v2_v3_demographic_drop": 3,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 4,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "shallow",
+    "narrative": "부산 기장 28세 판매사무·예비창업자 박영민은 5개 버전에서 3번 정당이 흔들리는 swing 케이스다. v4에서 '청년 쉬었음 70만·창업중심대학 사업화자금·청년월세 상시 신청' PI 인용으로 민주당으로 갔다가 v6에서 다시 국힘으로 회귀하는데, 그 회귀가 권력 라벨 인지가 아닌 '규제 덜고 버틸 환경' 같은 일반론에 의존한다."
+  },
+  {
+    "persona_uuid": "1bcb0920d44849059dc8f042d1dc0769",
+    "votes": ["더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당"],
+    "n_changes": 0,
+    "trajectory": "stable",
+    "biggest_jump": null,
+    "fidelity": {
+      "v2_v3_demographic_drop": 4,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "전북 군산 27세 소방시설 기술자·워킹맘 이윤아는 5개 버전 모두 민주당을 고수하는 stable 케이스. v4에서 '육아휴직 250만원·사후지급금 폐지·대체인력 140만원·전기차 화재 의무화' PI를 풍부하게 인용하고, v5에서는 '특수고용·플랫폼 노동권·최저임금·기본소득 시범' 정책카드를 매끄럽게 짝짓지만, v6 권력 시그널은 '조국혁신당·진보당' 비교에서 멈출 뿐 가상 라벨 인지가 없다."
+  },
+  {
+    "persona_uuid": "1f3c644213f54ca0893bb9b4276044b7",
+    "votes": ["무당층/기권", "더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당"],
+    "n_changes": 1,
+    "trajectory": "drift",
+    "biggest_jump": "v2→v3",
+    "fidelity": {
+      "v2_v3_demographic_drop": 3,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "서울 용산 이촌동 48세 무직 교육학도 서원석은 v2 무당층에서 v3부터 민주당으로 정착한다. v4에서 '이촌동 골목·국립중앙박물관 교통비·단골 중식당 짬뽕값' PI를, v5에서 '26조 추경·고유가 피해지원금·플랫폼 노동자 산재보험·최저임금 1만320원' 정책카드를 모두 정확히 매칭한다. 다만 v6에서도 권력 라벨 변화는 잡지 못한다."
+  },
+  {
+    "persona_uuid": "1f4c5037223c4b77a4587913cd3dfd01",
+    "votes": ["국민의힘", "국민의힘", "더불어민주당", "더불어민주당", "국민의힘"],
+    "n_changes": 2,
+    "trajectory": "drift",
+    "biggest_jump": "v3→v4",
+    "fidelity": {
+      "v2_v3_demographic_drop": 3,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 4,
+      "v5_v6_power_signal": 2
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "경기 구리 46세 방수공 최영도는 v4에서 '신규 착공 감소·소상공인 정책자금 분기 접수·금리 2~4%' PI를 인용하며 '여당인 더불어민주당'이라는 명시 라벨까지 끌어와 민주당으로 옮겨간다. 그러나 v6에서는 권력 뒤집기 시그널을 받지 못하고 다시 국힘 회귀 — 정책 카드(재개발·재건축·민간 용적률) 매칭은 늘었지만 가상 대통령·여당 의석은 인지하지 못한다."
+  },
+  {
+    "persona_uuid": "214af53a47164b26828278435f6ff065",
+    "votes": ["국민의힘", "국민의힘", "국민의힘", "더불어민주당", "국민의힘"],
+    "n_changes": 2,
+    "trajectory": "drift",
+    "biggest_jump": "v4→v5",
+    "fidelity": {
+      "v2_v3_demographic_drop": 4,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 2
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "성남 중원 64세 베테랑 크레인 운전원 백종빈은 v4까지 국힘을 유지하다 v5에서 '특수고용·플랫폼 노동권·최저임금·적극 재정·공공주택·재건축 합리화' 정당 정책카드 매칭이 한꺼번에 작동하며 민주당으로 처음 이동한다. 그러나 v6에서 '연금 재정 건전화·원전 유지·검찰 수사권 분리' 등 국힘 정책카드 쪽으로 다시 회귀 — 정책 매칭은 정확하지만 권력 라벨(장재현·여당 160석)에 대한 명시 인지는 없다."
+  }
+]

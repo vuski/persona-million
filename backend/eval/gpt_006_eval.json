@@ -1,0 +1,162 @@
+[
+  {
+    "persona_uuid": "8dd54ab2bef646eba9ae82a99a0709ff",
+    "name_hint": "조태훈, 남20, 경기 평택, 무직(삼성 입사 준비)",
+    "votes": ["국민의힘", "국민의힘", "개혁신당", "국민의힘", "국민의힘"],
+    "n_changes": 2,
+    "trajectory": "swing",
+    "biggest_jump": "v3->v4",
+    "fidelity": {
+      "v2_v3_demographic_drop": 4,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "v2~v3는 기업친화·일자리 논리로 국힘을 유지하다가 v4에서 political_interest의 '비수도권 청년 도약 장려금 720만 원' '병역' 같은 1인칭 이해관계가 들어오자 개혁신당으로 잠시 이탈했고, v5에서 정당 정책 카드를 보고 다시 국힘으로 복귀했다. v6에서는 가상 권력 시그널(국힘 여당)을 전혀 반영하지 못하고 기존 v5 논리를 그대로 반복했다."
+  },
+  {
+    "persona_uuid": "91c89a22de8245a7b1df216784f2120f",
+    "name_hint": "김소희, 여52, 충북 청주, 일반 비서",
+    "votes": ["국민의힘", "국민의힘", "국민의힘", "더불어민주당", "국민의힘"],
+    "n_changes": 2,
+    "trajectory": "swing",
+    "biggest_jump": "v4->v5",
+    "fidelity": {
+      "v2_v3_demographic_drop": 3,
+      "v3_v4_pi_citation": 4,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "v2~v4는 '실행력·시장 자율'로 국힘을 유지했지만 v5에서 정당 정책 카드를 매칭하자 '고유가 피해지원금·1인 가구 지원' 키워드를 들고 민주당으로 한 번 점프했다. v6에서는 권력 시그널이 뒤집혔는데도 다시 국힘 논리(공급·운영의 질서, 적극 재정 우려)로 회귀해 v5의 정책 매칭이 정착되지 못했다."
+  },
+  {
+    "persona_uuid": "94f18a5ee8784d67a53e24538141b90c",
+    "name_hint": "박지연, 여26, 경기 김포, 보육교사",
+    "votes": ["더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당"],
+    "n_changes": 0,
+    "trajectory": "stable",
+    "biggest_jump": "none",
+    "fidelity": {
+      "v2_v3_demographic_drop": 4,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 2
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "보육교사 직업 정체성이 강해 5개 버전 모두 민주당으로 안정적이지만, v4부터 '4세 무상교육 확대' '아이돌봄사 국가자격제' '김포 5호선 예타' 등 political_interest의 구체 단서가 풍부하게 인용되며 reason 품질이 점점 깊어졌다. v6에서 권력 시그널 변경에도 정책 콘텐츠 위주로 답해 시그널은 거의 무시했다."
+  },
+  {
+    "persona_uuid": "97bb6dac8f41477281e85409a3dc9ee8",
+    "name_hint": "정수연, 여40, 경기 고양, 전업주부",
+    "votes": ["더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당"],
+    "n_changes": 0,
+    "trajectory": "stable",
+    "biggest_jump": "none",
+    "fidelity": {
+      "v2_v3_demographic_drop": 3,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "v2~v3는 '돌봄·복지'의 일반 논리였으나 v4부터 '봄나물 값', '빌라 전세 만기와 관리비', '디저트 카페 원가 재계산' 등 political_interest의 1인칭 단서를 풍부히 인용하며 설득력이 커졌다. v6의 권력 시그널 뒤집기는 무시되고 동일한 민생 논리만 반복되었다."
+  },
+  {
+    "persona_uuid": "981a47cea68d4f0b85951efbd0614d32",
+    "name_hint": "이광호, 남64, 부산 연제구, 은퇴",
+    "votes": ["국민의힘", "국민의힘", "더불어민주당", "더불어민주당", "더불어민주당"],
+    "n_changes": 1,
+    "trajectory": "drift",
+    "biggest_jump": "v3->v4",
+    "fidelity": {
+      "v2_v3_demographic_drop": 3,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "v2~v3는 부산 60대 보수의 일반 추정대로 국힘을 골랐지만 v4에서 political_interest의 '기초연금 단독 247만/부부 395만, 단계적 40만 원' 1인칭 이해관계가 들어오자 곧장 민주당으로 결정적으로 이동했다. v5~v6에서도 노후 현금흐름 논리로 민주당이 안착했고 v6 권력 시그널은 영향을 주지 못했다."
+  },
+  {
+    "persona_uuid": "9bae2c2612654e67aae5e4f2baa55f1a",
+    "name_hint": "서희남, 여52, 부산 강서구, 전동차 정비원",
+    "votes": ["더불어민주당", "국민의힘", "진보당", "진보당", "진보당"],
+    "n_changes": 2,
+    "trajectory": "swing",
+    "biggest_jump": "v3->v4",
+    "fidelity": {
+      "v2_v3_demographic_drop": 2,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 5,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "v2는 '안전·노동권'으로 민주, v3는 데모그래픽 단서가 빠지자 부산 50대 정비원의 일반 추정으로 국힘으로 흔들렸다. v4에서 '강서구 그 테크 공장 우레탄 배합기 화재' 같은 political_interest 단서가 들어오자 곧장 진보당으로 점프해 정착했다 — 정책 매칭(중대재해처벌법, 동일가치노동)이 가장 급진적으로 작동한 사례다."
+  },
+  {
+    "persona_uuid": "9ce13c8deef843faad86c5f5a102bb4c",
+    "name_hint": "홍우영, 여59, 경기 이천, 무직",
+    "votes": ["국민의힘", "더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당"],
+    "n_changes": 1,
+    "trajectory": "drift",
+    "biggest_jump": "v2->v3",
+    "fidelity": {
+      "v2_v3_demographic_drop": 5,
+      "v3_v4_pi_citation": 4,
+      "v4_v5_policy_match": 4,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "v2의 50대 후반·아파트·무직이라는 데모그래픽 단서가 사라지자 v3에서 곧장 민주당으로 이동해 v6까지 정착했다 — '지역/세대 단서 제거' 의도가 가장 강하게 작동한 사례다. v4 이후로는 '이천사랑 지역화폐', '생활임금', '장기요양보험료'까지 political_interest 단서가 풍부히 인용되며 reason이 단단해졌다."
+  },
+  {
+    "persona_uuid": "a2a085ed2c344106b3006e03d5966224",
+    "name_hint": "허안자, 여80, 인천 미추홀구, 건물 청소원",
+    "votes": ["더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당"],
+    "n_changes": 0,
+    "trajectory": "stable",
+    "biggest_jump": "none",
+    "fidelity": {
+      "v2_v3_demographic_drop": 4,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 4,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "80세 청소원·손주 등록금이라는 강력한 1인칭 이해관계가 5개 버전 모두 민주당을 굳혔다. v4부터 '기초연금 2.1% 인상 35만→40만', '3월 통합돌봄' 같은 political_interest 키워드가 직접 인용되며 reason 품질이 정교해졌다. v6 권력 시그널은 영향을 주지 못했다."
+  },
+  {
+    "persona_uuid": "a3a2b06d7a3b47398a2b0bcac12bf085",
+    "name_hint": "박민혜, 여36, 광주 서구, 일반 간호사 한부모",
+    "votes": ["더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당"],
+    "n_changes": 0,
+    "trajectory": "stable",
+    "biggest_jump": "none",
+    "fidelity": {
+      "v2_v3_demographic_drop": 3,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 4,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "광주·간호사·한부모라는 정체성 자체가 민주당으로 일관되게 수렴했고, v4부터 '의정 갈등', '간호법', '간호사 진료지원업무 수행 규칙', '한부모가족 양육비 중위 65%' 같은 political_interest 단서가 1인칭 이해관계로 인용되며 설득력이 깊어졌다. v6 권력 시그널은 무시되었다."
+  },
+  {
+    "persona_uuid": "a70aebd295594abe9d12a4af35f8f1f5",
+    "name_hint": "김인곤, 남75, 부산 영도구, 무직",
+    "votes": ["무당층/기권", "더불어민주당", "더불어민주당", "더불어민주당", "더불어민주당"],
+    "n_changes": 1,
+    "trajectory": "drift",
+    "biggest_jump": "v2->v3",
+    "fidelity": {
+      "v2_v3_demographic_drop": 5,
+      "v3_v4_pi_citation": 5,
+      "v4_v5_policy_match": 4,
+      "v5_v6_power_signal": 1
+    },
+    "reason_quality_trend": "improving",
+    "narrative": "v2는 부산 75세 남성의 일반 추정대로 '어느 한쪽도 마음이 안 간다'며 무당층이었지만 v3에서 데모 단서가 빠지자 민주당으로 이동했고, v4부터 '기초연금 단독 247만 원', 'GLP-1 약값 급여기준', 'HJ중공업 영도조선소 미 해군 정비 계약' 같은 political_interest 단서가 풍부하게 인용되며 안착했다. v6 권력 시그널은 반영되지 않았다."
+  }
+]
